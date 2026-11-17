@@ -146,6 +146,27 @@ svg.machine{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
 .st.warn{background:color-mix(in srgb, var(--warn) 16%, var(--surface));color:var(--warn)}
 .up{color:var(--ok);font-weight:700}
 
+/* Explicación de los programas */
+.why{margin-top:34px;display:grid;gap:18px;grid-template-columns:minmax(0,1fr)}
+.why > *{min-width:0}
+.why h2{font-size:1.4rem}
+.why .intro{max-width:72ch;color:var(--ink)}
+.why .short{border-left:4px solid var(--accent);background:var(--surface);padding:12px 16px;border-radius:0 10px 10px 0;max-width:80ch}
+.twocol{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.twocol > div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;min-width:0}
+.twocol h3{font-size:1rem;margin-bottom:8px}
+.twocol ul{margin:0;padding-left:1.1rem;display:grid;gap:6px;font-size:.95rem}
+.whyw{overflow-x:auto;background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.whyt{border-collapse:collapse;width:100%;font-size:.9rem;min-width:640px}
+.whyt th,.whyt td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:center;vertical-align:top}
+.whyt th:first-child,.whyt td:first-child{text-align:left}
+.whyt thead th{font-family:var(--f-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+.whyt td.why-r{text-align:left;color:var(--muted);font-size:.86rem;min-width:240px}
+.mk{display:inline-block;min-width:54px;padding:2px 8px;border-radius:999px;font-size:.75rem;font-weight:700}
+.mk.hi{background:color-mix(in srgb, var(--accent) 16%, var(--surface));color:var(--accent)}
+.mk.md{color:var(--muted);border:1px dashed var(--line)}
+.why .note{font-size:.9rem;color:var(--muted);max-width:80ch}
+.whylink{color:var(--accent);font-weight:600}
 footer{margin-top:34px;border-top:1px solid var(--line);padding-top:16px;display:grid;gap:6px;color:var(--muted);font-size:.88rem}
 footer strong{color:var(--ink);font-family:var(--f-display);font-size:1rem}
 @media (prefers-reduced-motion: reduce){.gear,.phva div{transition:none}}
@@ -184,10 +205,60 @@ footer strong{color:var(--ink);font-family:var(--f-display);font-size:1rem}
         <div data-p="V"><b>V</b><span>Verificar</span></div>
         <div data-p="A"><b>A</b><span>Actuar</span></div>
       </div>
-      <p class="legend">Los engranajes atenuados tienen menor énfasis para el programa seleccionado. La línea punteada es la cadena PHVA: la auditoría devuelve el ciclo al inicio.</p>
+      <p class="legend">Los engranajes atenuados tienen menor énfasis para el programa seleccionado (<a class="whylink" href="#por-que">¿por qué?</a>). La línea punteada es la cadena PHVA: la auditoría devuelve el ciclo al inicio.</p>
     </div>
     <article class="panel" id="panel" aria-live="polite"></article>
   </main>
+
+  <section class="why" id="por-que" aria-labelledby="why-h">
+    <h2 id="why-h">¿Por qué cambian los engranajes según el programa?</h2>
+    <p class="short"><b>Respuesta corta:</b> es una <b>configuración docente de esta herramienta</b>, propuesta al construirla con asistencia de la IA. No es un estándar publicado ni una distribución validada. Se apoya en el núcleo de competencias que cada disciplina reconoce en su práctica real, pero la decisión de qué engranaje queda resaltado y cuál atenuado es pedagógica y se puede ajustar.</p>
+    <div class="twocol">
+      <div>
+        <h3>Lo que viene de la práctica real</h3>
+        <ul>
+          <li><b>Rehabilitación:</b> el fisiatra integra el funcionamiento con la CIF (OMS, 2001) y define el enfoque terapéutico con los criterios de Dietz (1981). Por eso recorre el sistema completo.</li>
+          <li><b>Geriatría:</b> la valoración geriátrica integral examina la función, la cognición, el ánimo, la nutrición, la polifarmacia, las caídas y la situación social y del cuidador.</li>
+          <li><b>Dolor y cuidado paliativo:</b> según la definición de la OMS, su foco es aliviar el sufrimiento y controlar los síntomas, con metas de cuidado acordadas con el paciente y la familia.</li>
+          <li><b>Oncología pediátrica:</b> usa escalas diseñadas para la edad (Lansky, 1987; WeeFIM), la versión de la CIF para infancia y adolescencia (CIF-IA, 2007) y el cuidado centrado en la familia, el juego y la escuela.</li>
+          <li><b>Enfermería oncológica:</b> trabaja con el proceso de atención de enfermería y las metas internacionales de seguridad del paciente (Joint Commission International): identificación, prevención de caídas y lesiones, continuidad del cuidado.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Lo que es configuración de la herramienta</h3>
+        <ul>
+          <li>Qué engranajes quedan con énfasis <b>alto</b> o <b>medio</b> para cada programa.</li>
+          <li>La atenuación visual de los engranajes de énfasis medio.</li>
+          <li>La nota de énfasis que aparece en cada panel según el programa.</li>
+          <li>El eje (paciente y familia) y el análisis CIF nunca se atenúan: la herramienta los considera comunes a todos los programas.</li>
+        </ul>
+        <p class="note" style="margin-top:10px"><b>Atenuado no significa omitible.</b> Todo residente debe recorrer los siete engranajes. El énfasis indica dónde su programa espera mayor profundidad y dónde suele apoyarse en la valoración de otras disciplinas.</p>
+      </div>
+    </div>
+    <div>
+      <h3 style="font-size:1rem;margin-bottom:8px">Énfasis configurado por programa</h3>
+      <div class="whyw"><table class="whyt" id="why-table"></table></div>
+    </div>
+    <div class="twocol">
+      <div>
+        <h3>Cómo convertir esta configuración en un fundamento propio</h3>
+        <ul>
+          <li>Validarla por consenso con los coordinadores de cada programa (técnica Delphi o grupo nominal): ¿qué engranajes exige cada programa con mayor profundidad?</li>
+          <li>Contrastarla con las notas reales: auditar historias de residentes de cada programa y ver qué dominios documentan y cuáles omiten.</li>
+          <li>Alinearla con las competencias o actividades profesionales confiables (EPA) de cada plan de estudios.</li>
+          <li>Ajustar la tabla con esos resultados. Así el énfasis pasa de propuesta docente a consenso institucional.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Para usarla en clase</h3>
+        <ul>
+          <li>Pregunta para discusión: ¿qué engranaje atenuado de su programa es el que más riesgo genera si se omite?</li>
+          <li>Ejercicio: cambiar de programa con el mismo caso y discutir qué hallazgo resalta cada disciplina.</li>
+          <li>Interdisciplinariedad: el engranaje que un programa atenúa suele ser el que otro programa aporta con mayor profundidad.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <footer>
     <strong>La IA organiza; el juicio clínico decide; el paciente es el centro.</strong>
@@ -457,5 +528,12 @@ document.getElementById('prev').addEventListener('click',()=>select(ORDER[(ORDER
 document.querySelectorAll('.chip[data-lens]').forEach(c=>c.addEventListener('click',()=>{lens=c.dataset.lens;document.querySelectorAll('.chip[data-lens]').forEach(x=>x.setAttribute('aria-pressed',String(x===c)));try{localStorage.setItem('lens',lens);}catch(e){}render();}));
 try{const s=localStorage.getItem('lens');if(s&&LENS[s]){lens=s;document.querySelectorAll('.chip[data-lens]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.lens===s)));}}catch(e){}
 render();
+/* Tabla de énfasis por programa, generada desde la misma configuración (LENS) */
+(function(){ const t=document.getElementById('why-table'); if(!t) return;
+  const cols=['hc','enc','fx','seg','cif','plan','aud'];
+  const WHY={rehab:'Integra el sistema completo: es responsable del análisis CIF, del enfoque de Dietz y del plan.',geri:'Valoración geriátrica integral: cognición, ánimo, caídas, fragilidad, polifarmacia y cuidador; prevención del deterioro hospitalario.',pal:'Intención del tratamiento, carga sintomática, metas de cuidado y pronóstico vital frente al funcional.',ped:'Protocolo y toxicidades tardías, escalas por edad, umbrales del protocolo pediátrico, familia, juego y escuela.',enf:'Necesidades de cuidado, verificación de seguridad, educación al cuidador, continuidad y calidad del registro.'};
+  t.innerHTML='<thead><tr><th scope="col">Programa</th>'+cols.map(c=>`<th scope="col">${G[c].n} · ${G[c].short||G[c].name}</th>`).join('')+'<th scope="col">Por qué (resumen)</th></tr></thead><tbody>'+
+    Object.entries(LENS).map(([k,L])=>`<tr><th scope="row">${L.name}</th>`+cols.map(c=>{ const hi=c==='cif'||L.hi.includes(c); return `<td><span class="mk ${hi?'hi':'md'}">${hi?'Alto':'Medio'}</span></td>`; }).join('')+`<td class="why-r">${WHY[k]}</td></tr>`).join('')+'</tbody>';
+})();
 })();
 </script>
