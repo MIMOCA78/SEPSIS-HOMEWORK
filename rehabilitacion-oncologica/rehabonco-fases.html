@@ -1,4 +1,4 @@
-<title>RehabOnco Fases 1–5</title>
+<title>RehabOnco Fases 1–6</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Serif+Display&family=JetBrains+Mono:wght@400;500;600&display=swap">
@@ -472,6 +472,23 @@ select.f5urg{width:auto;max-width:170px;font-size:12px;padding:4px 8px}
 #f5-saf li,#f5-al li{border-left:3px solid var(--line-2);padding-left:8px;font-size:12.5px;line-height:1.5;color:var(--ink-2)}
 #f5-saf li.lv-c,#f5-al li.lv-c{border-left-color:var(--inc)} #f5-saf li.lv-a,#f5-al li.lv-a{border-left-color:var(--hi)}
 #f5-saf .badge,#f5-al .badge{margin:0 4px 0 0}
+/* FASE 6 */
+.f6bar{display:inline-block;width:90px;height:8px;border-radius:4px;background:var(--line);vertical-align:middle;margin-right:8px;overflow:hidden}
+.f6bar i{display:block;height:100%;border-radius:4px}
+.f6bar i.ok{background:var(--ok)} .f6bar i.m{background:var(--md)} .f6bar i.c{background:var(--inc)}
+.f6t select{max-width:230px;font-size:12px;padding:4px 6px}
+.f6M{color:var(--inc);font-weight:700}
+.f6man{display:flex;flex-direction:column;align-items:flex-start;gap:6px;margin-top:10px}
+.f6list{list-style:none;padding-left:0!important;display:flex;flex-direction:column;gap:6px;margin:0}
+.f6list li{font-size:12.5px;line-height:1.5;color:var(--ink-2)}
+.f6list .badge{margin:0 4px 0 0}
+.f6go{display:inline!important}
+#f6-rules,#f6-rvinc{list-style:none;padding-left:0!important;display:flex;flex-direction:column;gap:6px;margin:0}
+#f6-rules li,#f6-rvinc li{border-left:3px solid var(--line-2);padding-left:8px;font-size:12.5px;line-height:1.5;color:var(--ink-2)}
+#f6-rules li.lv-c,#f6-rvinc li.lv-c{border-left-color:var(--inc)} #f6-rules li.lv-ok{border-left-color:var(--ok)}
+#f6-rules .badge,#f6-rvinc .badge{margin:0 4px 0 0}
+.f6up{color:var(--ok);font-weight:600} .f6dn{color:var(--inc);font-weight:600}
+#f6-rvtab input{max-width:110px}
 /* OVERLAY */
 .ovl{position:fixed;inset:0;background:var(--overlay);z-index:50;display:none;align-items:flex-start;justify-content:center;padding:calc(24px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px));overflow-y:auto}
 .ovl.open{display:flex}
@@ -534,7 +551,7 @@ select.f5urg{width:auto;max-width:170px;font-size:12px;padding:4px 8px}
 
 <div class="app">
   <nav class="side" aria-label="Secciones de la valoración">
-    <div class="brand"><span class="brand-k">Rehabilitación oncológica</span><span class="brand-t">Fases 1 a 5 · Información, riesgo, examen, CIF y plan</span></div>
+    <div class="brand"><span class="brand-k">Rehabilitación oncológica</span><span class="brand-t">Fases 1 a 6 · Información, riesgo, examen, CIF, plan y auditoría</span></div>
     <ol class="nav" id="nav">
       <li data-navsec="meta"><a href="#s-meta"><span class="nn">0</span><span class="nt">Encabezado</span><span class="ns">Encabezado</span><span class="nb"></span></a></li>
       <li data-navsec="socio"><a href="#s-socio"><span class="nn">1</span><span class="nt">Datos sociodemográficos</span><span class="ns">Sociodemográficos</span><span class="nb"></span></a></li>
@@ -546,7 +563,8 @@ select.f5urg{width:auto;max-width:170px;font-size:12px;padding:4px 8px}
       <li data-navsec="f3"><a href="#s-f3"><span class="nn">7</span><span class="nt">Fase 3 · RxS y examen físico</span><span class="ns">Fase 3</span><span class="nb"></span></a></li>
       <li data-navsec="f4"><a href="#s-f4"><span class="nn">8</span><span class="nt">Fase 4 · CIF y diagnóstico</span><span class="ns">Fase 4</span><span class="nb"></span></a></li>
       <li data-navsec="f5"><a href="#s-f5"><span class="nn">9</span><span class="nt">Fase 5 · Enfoques, objetivos y plan</span><span class="ns">Fase 5</span><span class="nb"></span></a></li>
-      <li data-navsec="sum"><a href="#s-sum"><span class="nn">10</span><span class="nt">Resumen y exportación</span><span class="ns">Resumen</span><span class="nb"></span></a></li>
+      <li data-navsec="f6"><a href="#s-f6"><span class="nn">10</span><span class="nt">Fase 6 · Auditoría y revaloración</span><span class="ns">Fase 6</span><span class="nb"></span></a></li>
+      <li data-navsec="sum"><a href="#s-sum"><span class="nn">11</span><span class="nt">Resumen y exportación</span><span class="ns">Resumen</span><span class="nb"></span></a></li>
     </ol>
     <div class="side-foot">
       <label class="sw"><input type="checkbox" id="autosave" data-autosave> <span>Guardar borrador en este navegador<small>Solo en este equipo. Desactívelo en equipos compartidos.</small></span></label>
@@ -824,8 +842,35 @@ select.f5urg{width:auto;max-width:170px;font-size:12px;padding:4px 8px}
       </div>
     </section>
 
+    <section class="sec" id="s-f6">
+      <header class="sec-h"><span class="sec-n">10</span><div><h2>Fase 6 · Auditoría de la nota y revaloración</h2><p>Cierra el ciclo PHVA. Verificar: autoauditoría con los 10 componentes, la ponderación, la regla de puntaje y las 12 reglas de seguridad del instructivo del servicio, calculada con lo registrado en las Fases 1 a 5. Actuar: revaloración con las mismas escalas del ingreso, resultado de cada objetivo y decisión sobre el plan.</p></div></header>
+      <div class="sec-b" id="f6-body">
+        <div class="al-counts" id="f6-counts"></div>
+        <nav class="f2nav" aria-label="Partes de la Fase 6"><a class="f2chip" href="#f6m-A"><span class="mono">A</span> Autoría y verificaciones</a><a class="f2chip" href="#f6m-B"><span class="mono">B</span> Calificación</a><a class="f2chip" href="#f6m-C"><span class="mono">C</span> Hallazgos y reglas de seguridad</a><a class="f2chip" href="#f6m-D"><span class="mono">D</span> Revaloración y decisión</a></nav>
+        <div class="f2hero" id="f6-hero"><p class="f2hero-k">Calificación total de la nota (autoauditoría)</p><p class="f2hero-t" id="f6-total">—</p><p class="f2hero-d" id="f6-desc"></p></div>
+        <section class="f2m" id="f6m-A"><header class="f2m-h"><span class="f2m-tag">A</span><h3>Autoría y verificaciones del profesional</h3></header>
+          <p class="f2note">La Resolución 1995 de 1999 (art. 5) exige fecha, hora, nombre completo y firma en cada anotación. Las verificaciones que la herramienta no puede comprobar se marcan a mano; sin marcar cuentan como hallazgo menor.</p>
+          <div id="f6-auth"></div></section>
+        <section class="f2m" id="f6m-B"><header class="f2m-h"><span class="f2m-tag">B</span><h3>Calificación por componente</h3></header><div id="f6-comp"></div></section>
+        <section class="f2m" id="f6m-C"><header class="f2m-h"><span class="f2m-tag">C</span><h3>Hallazgos y reglas de seguridad</h3></header>
+          <p class="f2note">Toque un hallazgo para ir al campo. Un hallazgo mayor 🔴 resta 15 puntos y casi siempre deja el componente por debajo de 80: corríjalo o declare el dato como pendiente antes de firmar. Declarar un dato faltante es, como mucho, un hallazgo menor; inventarlo o concluir sin él es mayor.</p>
+          <div id="f6-find"></div>
+          <div class="f2card"><h4>Las 12 reglas de seguridad</h4><ul id="f6-rules"></ul></div></section>
+        <section class="f2m" id="f6m-D"><header class="f2m-h"><span class="f2m-tag">D</span><h3>Revaloración y decisión (Actuar)</h3></header>
+          <p class="f2note">Registre las mismas escalas del ingreso para medir el cambio. La columna de ingreso toma los valores de la Fase 3. La herramienta indica si cada medida mejora o empeora; no aplica diferencias mínimas clínicamente importantes.</p>
+          <div id="f6-rvhead"></div><div id="f6-rvtab"></div>
+          <p class="f3sub">Resultado de los objetivos de la Fase 5</p><div id="f6-goals"></div>
+          <p class="f3sub">Decisión</p><div id="f6-dec"></div><ul id="f6-rvinc"></ul></section>
+        <div class="f2card"><h4>Párrafo de la Fase 6 para la historia clínica</h4>
+          <textarea class="f2hc" id="f6-hc" readonly aria-label="Párrafo de la Fase 6"></textarea>
+          <div class="act-row"><button type="button" class="btn primary sm" data-act="copy-f6">Copiar párrafo</button></div>
+        </div>
+        <p class="cr-ref">Fuente de los criterios: Instructivo para la historia clínica de Rehabilitación Oncológica del servicio (10 componentes, ponderación del Tablero de Auditoría Clínica, regla de puntaje y 12 reglas de seguridad) · Resolución 1995 de 1999. Herramienta formativa: no reemplaza el juicio clínico ni certifica cumplimiento normativo o de acreditación.</p>
+      </div>
+    </section>
+
     <section class="sec" id="s-sum">
-      <header class="sec-h"><span class="sec-n">10</span><div><h2>Resumen y exportación</h2><p>Texto listo para la historia clínica con las Fases 1, 3, 2, 4 y 5. Los datos faltantes aparecen como [INFORMACIÓN PENDIENTE] y las alertas se listan al final. El JSON incluye las cinco fases.</p></div></header>
+      <header class="sec-h"><span class="sec-n">11</span><div><h2>Resumen y exportación</h2><p>Texto listo para la historia clínica con las Fases 1, 3, 2, 4, 5 y 6. Los datos faltantes aparecen como [INFORMACIÓN PENDIENTE] y las alertas se listan al final. El JSON incluye las seis fases.</p></div></header>
       <div class="sec-b">
         <textarea class="sum" id="sum-text" readonly aria-label="Resumen de la historia clínica"></textarea>
         <div class="act-row">
@@ -1169,7 +1214,7 @@ const join=(...a)=>a.filter(x=>!isEmpty(x)&&x!==false).join(' · ');
 function newItem(kind){ const o={_id:uid()}; DEF[kind].forEach(d=>{o[d[0]]=d[2]==='chips'?[]:'';}); return o; }
 function itemBlank(kind,it){ return DEF[kind].every(d=>isEmpty(it[d[0]])); }
 function emptyState(){
-  const s={v:1,meta:{},socio:{},dx:{primarios:[newItem('dx')],comorbilidades:''},tx:{intencion:'',intencionFuente:'',txNotas:'',qt:[],rt:[],cx:[],otras:[]},esp:[],labs:{tomas:[],notas:''},img:[],eco:[],fuenteAlertas:[],documentos:[],evidencias:[],f2:{ov:{}},f3:{},f4:{ov:{},add:[],pf:'',dx:''},f5:{enf:{},prim:'',just:'',pp:'',goals:[],disc:{}}};
+  const s={v:1,meta:{},socio:{},dx:{primarios:[newItem('dx')],comorbilidades:''},tx:{intencion:'',intencionFuente:'',txNotas:'',qt:[],rt:[],cx:[],otras:[]},esp:[],labs:{tomas:[],notas:''},img:[],eco:[],fuenteAlertas:[],documentos:[],evidencias:[],f2:{ov:{}},f3:{},f4:{ov:{},add:[],pf:'',dx:''},f5:{enf:{},prim:'',just:'',pp:'',goals:[],disc:{}},f6:{hora:'',autor:'',rol:'',registro:'',sup:'',man:{},lvl:{},rv:{fecha:'',nota:'',prox:'',m:{},g:{},dec:[]}}};
   DEF.meta.forEach(d=>{s.meta[d[0]]=d[2]==='chips'?[]:'';});
   s.meta.fechaVal=todayISO();
   DEF.socio.forEach(g=>g.f.forEach(d=>{s.socio[d[0]]=d[2]==='chips'?[]:'';}));
@@ -1205,6 +1250,14 @@ function normalizeState(o){
     if(Array.isArray(f.goals)) s.f5.goals=f.goals.filter(g=>g&&typeof g==='object').slice(0,40).map(g=>({id:/^g[a-z0-9]{4,12}$/.test(g.id||'')?g.id:'g'+uid(),prob:/^[bsde]\d{1,5}(_[a-z0-9]{1,4})?$/.test(g.prob||'')?g.prob:'',plazo:['corto','mediano','largo'].includes(g.plazo)?g.plazo:'',sem:str(g.sem,12),fecha:/^\d{4}-\d{2}-\d{2}$/.test(g.fecha||'')?g.fecha:'',esp:str(g.esp,800),ind:str(g.ind,300),bas:str(g.bas,300),meta:str(g.meta,300),qmeta:/^[0-4]$/.test(String(g.qmeta||''))?String(g.qmeta):'',rel:str(g.rel,800),alc:g.alc==='1'?'1':'',enf:EK.includes(g.enf)?g.enf:'',disc:Array.isArray(g.disc)?g.disc.filter(k=>F5DK.includes(k)):[],src:g.src==='sug'?'sug':''}));
     if(f.disc&&typeof f.disc==='object') F5DK.forEach(k=>{ const d=f.disc[k]; if(!d||typeof d!=='object') return; const D=F5DISC.find(x=>x.k===k); const keys=D.items.map(x=>x[0]); const items=Array.isArray(d.items)?d.items.filter(x=>keys.includes(x)):[]; const urg={}; if(d.urg&&typeof d.urg==='object') Object.entries(d.urg).forEach(([a,b])=>{ if(keys.includes(a)&&['urg','pri','pro'].includes(b)) urg[a]=b; }); const ft=d.fitt||{};
       s.f5.disc[k]={st:['ind','cur','no'].includes(d.st)?d.st:'',items,urg,freq:str(d.freq,120),ses:str(d.ses,120),nota:str(d.nota,2000),otro:str(d.otro,600),fitt:{aer:str(ft.aer,200),fza:str(ft.fza,200),prog:str(ft.prog,300)}}; }); }
+  if(o.f6&&typeof o.f6==='object'&&!Array.isArray(o.f6)){ const f=o.f6, str=(v,n)=>String(v==null?'':v).slice(0,n);
+    ['hora','autor','rol','registro','sup'].forEach(k=>{ s.f6[k]=str(f[k],200); });
+    if(f.man&&typeof f.man==='object') ['plantilla','siglas','causal'].forEach(k=>{ if(f.man[k]===true) s.f6.man[k]=true; });
+    if(f.lvl&&typeof f.lvl==='object') Object.entries(f.lvl).forEach(([k,v])=>{ if(/^(10|[1-9])$/.test(k)&&['conf','parc','no','ne'].includes(v)) s.f6.lvl[k]=v; });
+    const r=f.rv||{}; s.f6.rv.fecha=/^\d{4}-\d{2}-\d{2}$/.test(r.fecha||'')?r.fecha:''; s.f6.rv.prox=/^\d{4}-\d{2}-\d{2}$/.test(r.prox||'')?r.prox:''; s.f6.rv.nota=str(r.nota,4000);
+    if(r.m&&typeof r.m==='object') Object.entries(r.m).forEach(([k,v])=>{ if(/^[a-z]{2,8}$/.test(k)&&v!=null&&String(v).trim()!=='') s.f6.rv.m[k]=str(v,20); });
+    if(r.g&&typeof r.g==='object') Object.entries(r.g).forEach(([k,v])=>{ if(/^g[a-z0-9]{4,12}$/.test(k)&&v&&typeof v==='object') s.f6.rv.g[k]={st:['logrado','parcial','no','ne'].includes(v.st)?v.st:'',val:str(v.val,300)}; });
+    if(Array.isArray(r.dec)) s.f6.rv.dec=r.dec.filter(x=>['mantener','ajustar','enfoque','intens','egreso','diferir','suspender','remitir'].includes(x)); }
   if(o.__ejemplo) s.__ejemplo=true;
   return s;
 }
@@ -1373,6 +1426,7 @@ function renderAll(){
   renderLabs();
   renderF2();
   renderF3();
+  renderF6Static();
   $('#banner-ej').hidden=!state.__ejemplo;
 }
 
@@ -1673,7 +1727,7 @@ function renderNav(A){
   const c={};
   A.forEach(a=>{ const n=SECNAV[a.sec]; if(!c[n]) c[n]={inc:0,ver:0,pend:0}; c[n][a.sev]++; });
   $$('[data-navsec]').forEach(li=>{
-    const k=li.dataset.navsec, b=li.querySelector('.nb'); if(!b||k==='sum'||k==='f2'||k==='f3'||k==='f4'||k==='f5') return;
+    const k=li.dataset.navsec, b=li.querySelector('.nb'); if(!b||k==='sum'||k==='f2'||k==='f3'||k==='f4'||k==='f5'||k==='f6') return;
     const x=c[k]; b.className='nb';
     if(x&&x.inc){ b.classList.add('inc'); b.textContent=x.inc+x.ver; b.title=`${x.inc} inconsistencias, ${x.ver} por verificar, ${x.pend} pendientes`; }
     else if(x&&x.ver){ b.classList.add('ver'); b.textContent=x.ver; b.title=`${x.ver} por verificar, ${x.pend} pendientes`; }
@@ -1870,7 +1924,7 @@ function buildExport(A){
   const base=ecoBase();
   const nn=v=>{ const x=num(v); return Number.isFinite(x)?x:null; };
   return {
-    esquema:'rehab-onco/hc-fases-1-5', version:'2.0', generado:new Date().toISOString(), casoDeEjemplo:!!S.__ejemplo,
+    esquema:'rehab-onco/hc-fases-1-6', version:'2.1', generado:new Date().toISOString(), casoDeEjemplo:!!S.__ejemplo,
     datos:S,
     calculados:{
       fechaReferencia:isoOf(r),
@@ -1890,6 +1944,7 @@ function buildExport(A){
     fase4:f4Export(),
     fase5:f5Export(),
     fase2:f2Export(),
+    fase6:f6Export(),
     alertas:A.map(a=>({tipo:{inc:'inconsistencia',ver:'verificar',pend:'pendiente'}[a.sev],seccion:SECLABEL[a.sec]||a.sec,mensaje:a.msg,campo:a.path||null}))
   };
 }
@@ -4264,6 +4319,259 @@ document.addEventListener('input',e=>{ const t=e.target; if(!t.dataset) return; 
 document.addEventListener('change',e=>{ const t=e.target; if(!t.dataset) return; if(t.tagName==='SELECT'||t.type==='date') f5Field(t,true); });
 document.addEventListener('toggle',e=>{ const k=e.target&&e.target.dataset&&e.target.dataset.f5dk; if(k) f5Open[k]=e.target.open; },true);
 
+
+/* ═════════════ FASE 6 · AUDITORÍA DE LA NOTA (VERIFICAR) Y REVALORACIÓN (ACTUAR) ═════════════
+   Autoauditoría con los 10 componentes, la ponderación, la regla de puntaje y las 12 reglas de seguridad del
+   «Instructivo para la historia clínica de Rehabilitación Oncológica» del servicio. La herramienta propone el
+   nivel de cada componente a partir de lo registrado en las Fases 1 a 5; el auditor puede cambiarlo. Es una
+   herramienta formativa: no reemplaza el juicio clínico ni certifica cumplimiento normativo o de acreditación. */
+const F6C=[
+  {n:1,t:'Redacción, semántica y comprensión',w:10,sec:'#s-f6'},
+  {n:2,t:'Coherencia clínica y semiológica',w:20,sec:'#s-f3'},
+  {n:3,t:'Coherencia oncológica',w:10,sec:'#s-dx'},
+  {n:4,t:'Calidad de la clinimetría',w:15,sec:'#f3m-B'},
+  {n:5,t:'Análisis argumentativo CIF',w:20,sec:'#s-f4'},
+  {n:6,t:'Enfoque de Dietz',w:5,sec:'#f5m-A'},
+  {n:7,t:'Objetivos SMART',w:10,sec:'#f5m-C'},
+  {n:8,t:'Estrategias terapéuticas interdisciplinarias',w:0,sec:'#f5m-D',grp:1},
+  {n:9,t:'Ayudas diagnósticas y estudios complementarios',w:0,sec:'#s-para',grp:1},
+  {n:10,t:'Ayudas técnicas',w:0,sec:'#f5m-D',grp:1}];
+const F6RULES=[
+  [1,'No se prescribe ejercicio ni movilización sin signos vitales completos del día, incluida SpO₂ con su FiO₂.'],
+  [2,'Si se nombra hipotensión ortostática, desaturación, sangrado o inestabilidad, se mide y se define una acción.'],
+  [3,'Cada valor de laboratorio que condiciona el ejercicio se interpreta y se acuerda un umbral con el tratante.'],
+  [4,'Un valor incompatible con la clínica o mal rotulado se verifica antes de usarlo.'],
+  [5,'Una escala tiene un solo resultado por fecha en toda la nota.'],
+  [6,'ECOG y Karnofsky se calculan con la función actual y concuerdan con Barthel y la marcha observada.'],
+  [7,'No se usa un instrumento fuera de su población ni se extrapolan puntos de corte.'],
+  [8,'No se concluye sobre marcha, equilibrio, deglución ni cognición sin haberlos evaluado.'],
+  [9,'Las precauciones quirúrgicas, óseas, de catéteres y de ostomías son verificables y no contradicen la actividad indicada.'],
+  [10,'Todo riesgo identificado (nutricional, emocional, de disfagia, social, de caída, de piel) tiene una acción o remisión.'],
+  [11,'Ninguna ayuda técnica se prescribe sin evaluar la función que compensa; ningún paciente dependiente egresa sin plan de ayudas y entrenamiento del cuidador.'],
+  [12,'Una toxicidad o signo de alarma se comunica al tratante y queda registrado.']];
+const F6MAN=[['plantilla',1,'Sin texto de plantilla ajeno al caso (COVID-19, bioseguridad, alternativas «ó», género que no corresponde).'],['siglas',1,'Sin siglas no definidas; ortografía, mayúsculas y unidades revisadas.'],['causal',5,'El análisis escrito en la historia clínica recorre la cadena CIF con relaciones causales explícitas (no solo enumera hallazgos).']];
+const F6LV={conf:['Conforme',[85,100]],parc:['Parcialmente conforme',[50,84]],no:['No conforme',[0,49]],ne:['No evaluable',null]};
+const F6M=[
+  ['ecog','ECOG','0–4',-1],['kps','Karnofsky','%',1],['lansky','Lansky','',1],['barthel','Barthel','/100',1],['fim','FIM o WeeFIM total','/126',1],
+  ['apm','AM-PAC movilidad básica (bruto)','/24',1],['apa','AM-PAC actividades diarias (bruto)','/24',1],['sppb','SPPB','/12',1],['tug','TUG','s',-1],
+  ['grip','Dinamometría (mejor mano)','kg',1],['c6m','Caminata de 6 minutos','m',1],['esas','ESAS-r total','/90',-1],['dolor','ESAS-r dolor','/10',-1],['moca','MoCA','/30',1],['lf','Exceso de volumen del linfedema','%',-1]];
+const F6GOAL=[['logrado','Logrado'],['parcial','Parcial'],['no','No logrado'],['ne','No evaluado']];
+const F6DEC=[['mantener','Mantener el plan'],['ajustar','Ajustar objetivos'],['enfoque','Cambiar el enfoque de Dietz'],['intens','Ajustar la dosificación'],['egreso','Egreso con plan de continuidad'],['diferir','Diferir la rehabilitación'],['suspender','Suspender por seguridad'],['remitir','Remitir a otra disciplina o servicio']];
+function f6State(){ if(!state.f6||typeof state.f6!=='object') state.f6={}; const f=state.f6; ['hora','autor','rol','registro','sup'].forEach(k=>{ if(typeof f[k]!=='string') f[k]=''; }); if(!f.man||typeof f.man!=='object') f.man={}; if(!f.lvl||typeof f.lvl!=='object') f.lvl={}; if(!f.rv||typeof f.rv!=='object') f.rv={}; const r=f.rv; ['fecha','nota','prox'].forEach(k=>{ if(typeof r[k]!=='string') r[k]=''; }); if(!r.m||typeof r.m!=='object') r.m={}; if(!r.g||typeof r.g!=='object') r.g={}; if(!Array.isArray(r.dec)) r.dec=[]; return f; }
+function f6Base(sc){
+  const gd=f3n('grip_d'), gi=f3n('grip_i'); const g=[gd,gi].filter(Number.isFinite);
+  const lf=['ms','mi'].map(l=>sc.vol&&sc.vol[l]).find(o=>o&&o.pct!=null);
+  const n=v=>v==null||v===''||!Number.isFinite(+v)?null:+v;
+  return {ecog:n(f3v('ecog')),kps:n(f3v('kps')),lansky:n(f3v('lansky')),barthel:sc.barthel.s,fim:sc.fim?sc.fim.total:null,apm:sc.ampac?sc.ampac.mov:null,apa:sc.ampac?sc.ampac.act:null,sppb:sc.sppb.total,tug:sc.tug,grip:g.length?Math.max(...g):null,c6m:n(f3v('c6m')),esas:sc.esas.total,dolor:sc.esas.es.dolor,moca:sc.moca?sc.moca.adj:null,lf:lf?Math.round(lf.pct*10)/10:null};
+}
+function f6Calc(){
+  const F=f6State(), S=state, sc=(lastF3||f3Calc()).sc, V=f3v, A=f3a, has=f3has, rx=id=>A('rxs_'+id);
+  const F2=lastF2||{V:{},ev:{flags:[],sc:{}},pend:[]}, V2=F2.V||{}, B4=lastF4||{act:[],list:[],X:{},pend:[]}, B5=lastF5, AL=lastA||[];
+  const fs=[]; const rules={}; const f=(c,sev,msg,rule,go)=>{ fs.push({c,sev,msg,rule:rule||null,go:go||null}); if(rule) rules[rule]=rules[rule]||[]; if(rule) rules[rule].push(msg); };
+  const ev=new Set(); const chk=r=>ev.add(r);
+  const ind=k=>['ind','cur'].includes(f5Dr(k).st), sel=(k,it)=>ind(k)&&f5Dr(k).items.includes(it);
+  const ex=ind('tf')||ind('tr');
+  const vit=['tas','tad','fc','fr','temp','spo2','o2'].every(has);
+  const es=sc.esas.es, age=B4.X&&B4.X.age;
+  const f3al=(lastF3&&lastF3.al)||[];
+  const gaitEval=has('marcha')||sc.sppb.gait!=null||sc.tug!=null||V('sppb_marcha_no')==='no';
+  const balEval=sc.sppb.bal!=null||has('romberg');
+  const act=B4.act||[], by=c=>act.find(x=>x.code===c);
+  const qd=x=>x&&((qIs(x.fp)&&+x.fp>=1)||(qIs(x.fc)&&+x.fc>=1));
+  const hosp=/hospitalaria|Urgencias/.test(S.meta.tipo||'');
+  /* C1 · Redacción */
+  if(!S.meta.fechaVal) f(1,'m','Falta la fecha de la valoración.');
+  if(!F.hora) f(1,'m','Falta la hora de la valoración (Resolución 1995 de 1999, art. 5).');
+  if(!F.autor) f(1,'m','Falta el nombre completo del autor.');
+  if(!F.rol||!F.registro) f(1,'m','Falta el rol o el registro profesional del autor.');
+  if(/residente/i.test(F.rol)&&!F.sup) f(1,'m','Nota de residente sin supervisor docente.');
+  F6MAN.filter(x=>x[1]===1).forEach(([k,,t])=>{ if(!F.man[k]) f(1,'m','Por verificar: '+lowFirst(t)); });
+  /* C2 · Clínica y semiología */
+  chk(1); chk(2); chk(8); chk(12);
+  if(!vit) f(2,ex?'M':'m',`Signos vitales incompletos${ex?' con ejercicio indicado en la Fase 5':''}: falta ${['tas','tad','fc','fr','temp','spo2','o2'].filter(k=>!has(k)).map(k=>({tas:'TA sistólica',tad:'TA diastólica',fc:'FC',fr:'FR',temp:'temperatura',spo2:'SpO₂',o2:'FiO₂ (aire ambiente u oxígeno)'})[k]).join(', ')}.`,ex?1:null,'#f3b-vitales');
+  if(rx('neuro').includes('Mareo al ponerse de pie')&&!sc.oh) f(2,'M','Refiere mareo al ponerse de pie y no hay medición de ortostatismo (TA en decúbito y de pie).',2,'#f3b-vitales');
+  if((V('o2')==='supl'||(f3n('spo2')<92))&&ex&&!(f5Dr('tf').nota||f5Dr('tr').nota)) f(2,'m','Paciente con oxígeno o SpO₂ <92 % y ejercicio indicado: registre la SpO₂ mínima de suspensión en las observaciones del plan.',2,'#f5m-D');
+  const mN=MRC.filter(([k])=>has(`mrc_${k}_d`)||has(`mrc_${k}_i`)).length; if(!mN) f(2,'m','Sin fuerza muscular por grupo y lado (MRC).','','#f3b-mrc');
+  if(!ROT.some(([k])=>has(`rot_${k}_d`)||has(`rot_${k}_i`))) f(2,'m','Sin reflejos osteotendinosos registrados.','','#f3b-neuro');
+  if(lastF3&&lastF3.cnt.rxs.done<8) f(2,'m',`Revisión por sistemas incompleta (${lastF3.cnt.rxs.done} de ${lastF3.cnt.rxs.n} sistemas).`,'','#f3m-C');
+  const d450=by('d450'), b770=by('b770');
+  if(((qd(d450))||(b770&&qIs(b770.fq)&&+b770.fq>=1))&&!gaitEval) f(2,'M','La Fase 4 concluye sobre la marcha sin marcha observada, SPPB ni TUG registrados.',8,'#f3b-desemp');
+  if(by('d415')&&!balEval&&qd(by('d415'))) f(2,'M','Se califica el equilibrio sin prueba de equilibrio registrada.',8,'#f3b-desemp');
+  const ib=by('b510'); if(ib&&qIs(ib.fq)&&+ib.fq>=1&&!has('eat10')&&!has('mucositis')) f(2,'M','Se califica la deglución sin tamizaje (EAT-10) ni examen que la sustente.',8,'#f3b-rxs_orl');
+  if(rx('mental').includes('Ideas de muerte o de hacerse daño')&&!sel('psq','urg')) f(2,'M','Refiere ideas de muerte y no hay valoración prioritaria por psiquiatría en el plan.',12,'#f5d-psq');
+  if(V2.scc==='si'&&!(sel('esp','nci')||sel('par','rmn'))) f(2,'M','Sospecha de compresión medular sin RMN ni valoración por neurocirugía en el plan.',12,'#f5d-par');
+  if((V('tvp_sig')==='si'||V2.trombosis==='si')&&!sel('par','dop')) f(2,'M','Signos de trombosis venosa sin Doppler en el plan.',12,'#f5d-par');
+  if(V2.fiebre==='si'&&!(f5Dr('tf').nota||'').trim()) f(2,'m','Fiebre registrada: deje constancia de la comunicación al tratante en las observaciones del plan.',12,'#f5m-D');
+  const f3inc=f3al.filter(a=>a.lvl==='inc'&&!/ECOG|Karnofsky|Lansky|FIM|WeeFIM/.test(a.msg));
+  f3inc.slice(0,3).forEach(a=>f(2,'m','Inconsistencia de la Fase 3: '+a.msg,'','#f3b-'+a.b));
+  AL.filter(a=>a.sev==='inc'&&['socio','meta','esp','img','eco'].includes(a.sec)).slice(0,2).forEach(a=>f(2,'m','Inconsistencia de la Fase 1: '+a.msg,'',SECANCHOR[a.sec]));
+  /* C3 · Oncológica */
+  const p=S.dx.primarios.find(x=>!itemBlank('dx',x));
+  if(!p) f(3,'M','Sin diagnóstico oncológico registrado.','','#s-dx');
+  else { const miss=[!p.localizacion&&'localización',(!p.lado||p.lado==='')&&'lateralidad',!p.histologia&&'histología',!p.estadio&&p.sistema!=='No aplica'&&'estadio'].filter(Boolean); if(miss.length) f(3,'m',`Diagnóstico sin ${miss.join(', ')} (o sin la constancia de dato pendiente).`,'','#s-dx'); }
+  if(!S.tx.intencion) f(3,'m','Sin intención del tratamiento oncológico.','','#s-tx');
+  const txp=AL.filter(a=>a.sev==='pend'&&['qt','rt','cx','otras'].includes(a.sec)); if(txp.length) f(3,'m',`Tratamientos con datos incompletos (${txp.length}): ${txp.slice(0,3).map(a=>a.msg).join('; ')}${txp.length>3?'…':''}.`,'','#s-tx');
+  AL.filter(a=>a.sev==='inc'&&['dx','tx','qt','rt','cx','otras'].includes(a.sec)).slice(0,3).forEach(a=>f(3,'m','Inconsistencia oncológica: '+a.msg,'',SECANCHOR[a.sec]));
+  /* C4 · Clinimetría */
+  chk(5); chk(6); chk(7);
+  const ped=age!=null&&age<16;
+  if(!has('ecog')&&!ped) f(4,'m','Sin ECOG.','','#f3b-global');
+  if(ped?!has('lansky'):!has('kps')) f(4,'m',ped?'Sin Lansky en un menor de 16 años.':'Sin Karnofsky.','','#f3b-global');
+  f3al.filter(a=>a.lvl==='inc'&&/ECOG|Barthel \d+\/100 no concuerda/.test(a.msg)).forEach(a=>f(4,'M',a.msg,6,'#f3b-'+a.b));
+  const ecog=has('ecog')?+V('ecog'):null, aid=A('ayuda').filter(x=>x!=='Ninguna');
+  if(ecog!=null&&ecog<=1&&aid.length) f(4,'M',`ECOG ${ecog} con marcha con ayuda técnica (${lowFirst(aid.join(', '))}): según la tabla del instructivo, ECOG 1 exige marcha independiente sin apoyo.`,6,'#f3b-global');
+  if(ecog!=null&&ecog<=2&&has('bar_traslado')&&+V('bar_traslado')<=5) f(4,'M',`ECOG ${ecog} con gran ayuda o dependencia en las transferencias (Barthel traslado ${V('bar_traslado')}).`,6,'#f3b-global');
+  f3al.filter(a=>a.lvl==='inc'&&/Lansky registrado|WeeFIM registrado/.test(a.msg)).forEach(a=>f(4,'M',a.msg,7,'#f3b-'+a.b));
+  f3al.filter(a=>a.lvl==='m'&&/(Karnofsky registrado en un menor|FIM registrado en un niño|WeeFIM en una persona)/.test(a.msg)).forEach(a=>f(4,'m',a.msg,7,'#f3b-'+a.b));
+  if(sc.barthel.s==null&&!(sc.fim&&sc.fim.total!=null)&&!(sc.ampac&&sc.ampac.mov!=null)) f(4,'m','Sin escala completa de actividades básicas (Barthel, FIM o AM-PAC).','','#f3m-B');
+  if(sc.esas.n<9) f(4,'m','ESAS-r incompleto.','','#f3b-esas');
+  const ESACT={dolor:['dol','tf'],cansancio:['tf','to','psi'],somnolencia:['dol','esp'],nausea:['dol','esp'],apetito:['esp'],disnea:['tr','tf'],depresion:['psi','psq'],ansiedad:['psi','psq'],bienestar:['psi','dol']};
+  Object.entries(ESACT).forEach(([k,ds])=>{ if(es[k]!=null&&es[k]>=7&&!ds.some(ind)) f(4,'m',`ESAS-r ${esasShort(k)} ${es[k]}/10 sin una acción en el plan (${ds.map(d=>F5DT[d]).join(' o ')}).`,'','#f5m-D'); });
+  const falls=(f3n('caidas6')>=1)||(sc.tug!=null&&sc.tug>=12);
+  if(falls&&hosp&&sc.morse==null) f(4,'m','Riesgo de caída identificado sin escala de riesgo de caídas (Morse) en hospitalización.','','#f3b-morse');
+  /* C5 · CIF */
+  const partic=act.some(x=>x.comp==='d'&&/^d(6|7|8|9)/.test(x.code)&&x.fp!==''&&x.fp!=null);
+  const env=act.some(x=>x.comp==='e'&&x.fe);
+  if(!act.length) f(5,'M','Sin perfil de funcionamiento CIF.','','#s-f4');
+  else { if(!partic) f(5,'M','Sin restricciones o desempeño en la participación (vida doméstica, relaciones, trabajo, vida comunitaria).','','#f4m-d'); if(!env) f(5,'M','Sin factores ambientales (barreras y facilitadores) calificados.','','#f4m-e'); }
+  const nSug=act.filter(x=>x.st==='sug').length, nPend=act.filter(x=>['pend','man'].includes(x.st)).length;
+  if(nSug) f(5,'m',`${nSug} calificador${nSug>1?'es':''} sugerido${nSug>1?'s':''} por la herramienta sin confirmar.`,'','#s-f4');
+  if(nPend) f(5,'m',`${nPend} categoría${nPend>1?'s':''} CIF sin calificar.`,'','#s-f4');
+  if(!(S.f4&&S.f4.dx||'').trim()) f(5,'m','El diagnóstico de rehabilitación es solo la propuesta de la herramienta, sin revisión del profesional.','','#f4-dxcard');
+  if(!(S.f5&&S.f5.pp||'').trim()) f(5,'m','Sin las metas o prioridades expresadas por el paciente y su familia.','','#f5m-B');
+  if(!F.man.causal) f(5,'m','Por verificar: '+lowFirst(F6MAN[2][2]));
+  /* C6 · Dietz */
+  const prim=S.f5&&S.f5.prim;
+  if(!prim) f(6,'M','Enfoque de rehabilitación predominante no declarado.','','#f5m-A');
+  else { if(!(S.f5.just||'').trim()) f(6,'m','Enfoque predominante sin justificación escrita (pronóstico, reversibilidad del déficit y meta del paciente).','','#f5m-A');
+    if(prim==='rest'&&S.tx.intencion==='Paliativa') f(6,'m','Enfoque restaurador con intención paliativa del tratamiento: verifique la coherencia.','','#f5m-A');
+    if(prim==='pal'&&S.tx.intencion==='Curativa'&&ecog!=null&&ecog<=1) f(6,'m','Enfoque paliativo con intención curativa y ECOG ≤1: verifique la coherencia.','','#f5m-A'); }
+  /* C7 · SMART */
+  const goals=B5?B5.goals:[];
+  if(!goals.length) f(7,'M','No hay objetivos de rehabilitación formulados.','','#f5m-C');
+  goals.filter(o=>!['S','M','A','R','T'].every(k=>o.sm[k])).slice(0,3).forEach(o=>f(7,'m',`Objetivo ${o.n}: falta ${['S','M','A','R','T'].filter(k=>!o.sm[k]).join(', ')} del formato SMART.`,'','#f5g-'+o.g.id));
+  goals.filter(o=>o.g.src==='sug').slice(0,2).forEach(o=>f(7,'m',`Objetivo ${o.n}: borrador sugerido sin revisar.`,'','#f5g-'+o.g.id));
+  if(B5) B5.pend.filter(m=>/^Problema prioritario sin objetivo/.test(m)).slice(0,2).forEach(m=>f(7,'m',m,'','#f5m-B'));
+  /* C8 · Estrategias interdisciplinarias */
+  chk(9); chk(10);
+  if(ex&&!vit) f(8,'M','Ejercicio o terapia indicada sin línea basal de signos vitales completa.',1,'#f3b-vitales');
+  const nut=(sc.nrs&&sc.nrs.s>=3)||(B4.X&&B4.X.glim>=1); if(nut&&!sel('esp','nut')) f(8,'M',`Riesgo nutricional (${[sc.nrs&&sc.nrs.s>=3&&'NRS-2002 '+sc.nrs.s,B4.X&&B4.X.glim>=1&&'GLIM estadio '+B4.X.glim].filter(Boolean).join(', ')}) sin remisión a Nutrición clínica.`,10,'#f5d-esp');
+  const hmax=Math.max(-1,...[f3n('hads_a'),f3n('hads_d')].filter(Number.isFinite)); const emo=hmax>=11||(es.ansiedad!=null&&es.ansiedad>=7)||(es.depresion!=null&&es.depresion>=7);
+  if(emo&&!(ind('psi')||ind('psq'))) f(8,'M','Distrés emocional significativo sin Psicología ni Psiquiatría en el plan.',10,'#f5d-psi');
+  const dys=f3n('eat10')>=3||rx('orl').includes('Disfagia'); if(dys&&!ind('fon')) f(8,'M','Sospecha de disfagia sin Fonoaudiología en el plan.',10,'#f5d-fon');
+  if(falls&&!(sel('tf','equ')||ind('to'))) f(8,'M','Riesgo de caída sin entrenamiento del equilibrio ni medidas de prevención en el plan.',10,'#f5d-tf');
+  const barr=act.filter(x=>x.comp==='e'&&/^b/.test(x.fe||'')); if(barr.length&&!sel('esp','tso')&&!sel('to','amb')) f(8,'m',`Barreras ambientales (${barr.map(x=>x.code).join(', ')}) sin Trabajo social ni adaptación del entorno.`,10,'#f5d-to');
+  if(has('upp')&&V('upp')!=='no'&&!sel('to','upp')) f(8,'m','Lesión por presión sin prevención o manejo en el plan.',10,'#f5d-to');
+  if(B5) Object.entries(B5.disc).forEach(([k,s])=>Object.entries(s.items).forEach(([it,v])=>{ if(v.urg==='urg'&&!f5Dr(k).items.includes(it)) f(8,'M',`${F5DT[k]}: intervención sugerida como urgente no seleccionada (${v.why}).`,12,'#f5d-'+k); }));
+  F5DISC.filter(D=>D.ther&&f5Dr(D.k).st==='ind'&&!(f5Dr(D.k).freq||'').trim()).forEach(D=>f(8,'m',`${D.t} indicada sin frecuencia ni número de sesiones.`,'','#f5d-'+D.k));
+  const tf=f5Dr('tf'); if(sel('tf','aer')&&!(tf.fitt&&tf.fitt.aer)) f(8,'m','Ejercicio aeróbico sin parámetros FITT (frecuencia, intensidad, tiempo).','','#f5d-tf'); if(sel('tf','fza')&&!(tf.fitt&&tf.fitt.fza)) f(8,'m','Ejercicio de fuerza sin parámetros (series, repeticiones, intensidad).','','#f5d-tf');
+  const sins=F2.ev&&F2.ev.sc&&F2.ev.sc.sins, mir=F2.ev&&F2.ev.sc&&F2.ev.sc.mirels;
+  if(sins&&sins.s>=13&&(sel('tf','mar')||sel('tf','fza'))) f(8,'M',`SINS ${sins.s}/18 (potencialmente inestable) con marcha o fuerza indicadas: contradice la restricción de carga axial.`,9,'#f5d-tf');
+  if(mir&&mir.s>=9&&(sel('tf','mar')||sel('tf','fza'))) f(8,'M',`Mirels ${mir.s}/12 (riesgo alto de fractura) con marcha o fuerza indicadas sin descarga de la extremidad.`,9,'#f5d-tf');
+  if(F2.lvl&&F2.lvl.k==='alto'&&ex) f(8,'M','Terapia física o respiratoria indicada con contraindicaciones absolutas en la Fase 2.',9,'#s-f2');
+  /* C9 · Estudios */
+  chk(3); chk(4);
+  AL.filter(a=>a.sev==='inc'&&a.sec==='labs').forEach(a=>f(9,'M','Laboratorio incompatible sin verificar: '+a.msg,4,'#sub-labs'));
+  const r=refDate(); const lab=S.labs.tomas.map(t=>parseD(t.fecha)).filter(d=>d&&d<=r).sort((a,b)=>b-a)[0]; const days=lab?daysBetween(lab,r):null;
+  const actTx=V2.fase&&['neoadyuvante','adyuvante','rt_activa'].includes(V2.fase);
+  if(ex&&lab==null) f(9,'M','Ejercicio indicado sin hemograma registrado: no hay base para los umbrales de seguridad.',3,'#sub-labs');
+  else if(ex&&actTx&&days>7) f(9,'m',`Laboratorios de hace ${days} días con tratamiento oncológico activo y ejercicio indicado.`,3,'#sub-labs');
+  else if(ex&&days>30) f(9,'m',`Laboratorios de hace ${days} días con ejercicio indicado.`,3,'#sub-labs');
+  if(F2.pend&&F2.pend.length) f(9,'m',`Estratificación de riesgo incompleta: ${F2.pend.length} criterio${F2.pend.length>1?'s':''} de la Fase 2 sin información.`,'','#s-f2');
+  /* C10 · Ayudas técnicas */
+  chk(11);
+  const dep=(sc.barthel.s!=null&&sc.barthel.s<=60)||(sc.fim&&sc.fim.mot!=null&&sc.fim.mot<=58);
+  const pda=sel('to','pda')||sel('tf','pro')||sel('to','ort');
+  if(pda&&!gaitEval&&!balEval) f(10,'M','Ayudas técnicas indicadas sin evaluación registrada de la marcha, el equilibrio o las transferencias.',11,'#f3b-desemp');
+  if(dep&&!(sel('to','pda')||sel('to','cui'))) f(10,'M',`Paciente dependiente (${sc.barthel.s!=null?'Barthel '+sc.barthel.s+'/100':'FIM motor '+sc.fim.mot+'/91'}) sin plan de ayudas técnicas ni entrenamiento del cuidador.`,11,'#f5d-to');
+  const c10ne=!dep&&!pda&&!aid.length;
+  /* Puntajes */
+  const C=F6C.map(c=>{ const L=fs.filter(x=>x.c===c.n), M=L.filter(x=>x.sev==='M').length, m=L.filter(x=>x.sev==='m').length;
+    let auto=M===0?'conf':M<=2?'parc':'no'; if(c.n===10&&c10ne&&!L.length) auto='ne';
+    const lv=F.lvl[c.n]||auto, R=F6LV[lv][1]; const score=R?Math.max(R[0],R[1]-15*M-5*m):null;
+    return Object.assign({},c,{L,M,m,auto,lv,score,over:!!F.lvl[c.n]}); });
+  const g8=C.filter(c=>c.grp&&c.score!=null), gScore=g8.length?g8.reduce((a,c)=>a+c.score,0)/g8.length:null;
+  const dims=C.filter(c=>!c.grp).map(c=>({t:c.t,w:c.w,score:c.score})).concat([{t:'Intervenciones y ayudas complementarias (promedio de 8, 9 y 10)',w:10,score:gScore}]);
+  const valid=dims.filter(d=>d.score!=null), W=valid.reduce((a,d)=>a+d.w,0);
+  const total=W?valid.reduce((a,d)=>a+d.score*d.w,0)/W:null;
+  const nM=fs.filter(x=>x.sev==='M').length;
+  const meta=total!=null&&total>=80&&valid.every(d=>d.score>=80)&&!nM;
+  /* Revaloración */
+  const base=f6Base(sc), rv=F.rv, rd=parseD(rv.fecha), vd=parseD(S.meta.fechaVal);
+  const rows=F6M.map(([k,l,u,dir])=>{ const b=base[k], x=rv.m[k]!==undefined&&rv.m[k]!==''?num(rv.m[k]):null; const d=(b!=null&&Number.isFinite(x))?x-b:null; const tr=d==null?null:d===0?'igual':(d*dir>0?'mejora':'empeora'); return {k,l,u,dir,b,x:Number.isFinite(x)?x:null,d,tr}; });
+  const rinc=[]; if(rd&&vd&&rd<vd) rinc.push('La fecha de revaloración es anterior a la fecha de la valoración inicial.');
+  const anyRv=rows.some(x=>x.x!=null)||Object.keys(rv.g).length||rv.dec.length;
+  if(anyRv&&!rv.fecha) rinc.push('Hay datos de revaloración sin fecha.');
+  return {C,dims,total,meta,fs,rules,ev,nM,rows,rinc,rv,goals,days:(rd&&vd)?daysBetween(vd,rd):null};
+}
+/* Render */
+let lastF6=null; const f6Sig={};
+function f6TrTxt(t){ return t==='mejora'?'↑ mejora':t==='empeora'?'↓ empeora':t==='igual'?'sin cambio':''; }
+function renderF6Static(){
+  const F=f6State(); const box=$('#f6-auth'); if(!box) return;
+  const inp=(k,l,ph,cls)=>`<label class="f5f${cls?' '+cls:''}"><span>${esc(l)}</span><input type="text" data-f6="${k}" value="${esc(getIn(F,k)||'')}" placeholder="${esc(ph||'')}" autocomplete="off"></label>`;
+  box.innerHTML=`<div class="f5gg">${inp('hora','Hora de la valoración','Ej.: 10:40')}${inp('autor','Nombre completo del autor','','wide')}${inp('rol','Rol','Ej.: médico residente de MFR')}${inp('registro','Registro profesional','')}${inp('sup','Supervisor docente','Nombre y registro','wide')}</div>
+    <div class="f6man">${F6MAN.map(([k,c,t])=>`<button type="button" class="chip" data-f6man="${k}" aria-pressed="${!!F.man[k]}">C${c} · ${esc(t)}</button>`).join('')}</div>`;
+  const rv=$('#f6-rvhead'); if(rv) rv.innerHTML=`<div class="f5gg">${`<label class="f5f"><span>Fecha de la revaloración</span><input type="date" data-f6="rv.fecha" value="${esc(F.rv.fecha)}"></label>`}<label class="f5f"><span>Próxima revaloración</span><input type="date" data-f6="rv.prox" value="${esc(F.rv.prox)}"></label><p class="f5f wide f3hint" id="f6-rvdays"></p></div>`;
+  const tb=$('#f6-rvtab'); if(tb) tb.innerHTML=`<div class="tbl-wrap"><table class="f3t"><thead><tr><th scope="col">Medida</th><th scope="col">Ingreso (Fase 3)</th><th scope="col">Revaloración</th><th scope="col">Cambio</th></tr></thead><tbody>${F6M.map(([k,l,u])=>`<tr><th scope="row">${esc(l)}${u?` <span class="muted mono">${esc(u)}</span>`:''}</th><td class="mono" data-f6b="${k}"></td><td><input type="text" inputmode="decimal" data-f6="rv.m.${k}" value="${esc(F.rv.m[k]||'')}" aria-label="${esc(l)} en la revaloración" autocomplete="off"></td><td class="mono" data-f6d="${k}"></td></tr>`).join('')}</tbody></table></div>`;
+  const dc=$('#f6-dec'); if(dc) dc.innerHTML=`<div class="chips">${F6DEC.map(([k,l])=>`<button type="button" class="chip" data-f6dec="${k}" aria-pressed="${F.rv.dec.includes(k)}">${esc(l)}</button>`).join('')}</div><label class="f5f full"><span>Ajustes y justificación de la decisión</span><textarea rows="3" data-f6="rv.nota">${esc(F.rv.nota)}</textarea></label>`;
+}
+function refreshF6(){
+  const R=f6Calc(); lastF6=R; if(!$('#f6-body')) return R;
+  const hero=$('#f6-hero'), cls=R.total==null?'':R.meta?'lv-bajo':R.total>=80?'lv-prec':R.total>=60?'lv-modalto':'lv-alto';
+  hero.className='f2hero '+cls;
+  $('#f6-total').textContent=R.total==null?'—':fmtN(R.total,1)+' / 100';
+  $('#f6-desc').textContent=R.meta?'Cumple la meta del instructivo: total ≥80, ningún componente por debajo de 80 y ningún hallazgo mayor.':`No cumple la meta del instructivo (total ≥80, ningún componente <80 y ningún hallazgo mayor)${R.nM?`: ${R.nM} hallazgo${R.nM>1?'s':''} mayor${R.nM>1?'es':''} 🔴`:''}. Corrija o declare como pendiente cada hallazgo antes de firmar.`;
+  const bar=s=>s==null?'<span class="muted">N/E</span>':`<span class="f6bar"><i style="width:${Math.max(2,s)}%" class="${s>=80?'ok':s>=50?'m':'c'}"></i></span><b class="mono">${fmtN(s,0)}</b>`;
+  $('#f6-comp').innerHTML=`<div class="tbl-wrap"><table class="f3t f6t"><thead><tr><th scope="col">Componente</th><th scope="col">Peso</th><th scope="col">Hallazgos</th><th scope="col">Nivel</th><th scope="col">Puntaje</th></tr></thead><tbody>${R.C.map(c=>`<tr><th scope="row">${c.n}. ${esc(c.t)}</th><td class="mono">${c.grp?'10 % ÷ 3':c.w+' %'}</td><td class="mono">${c.M?`<span class="f6M">${c.M} 🔴</span> `:''}${c.m?c.m+' menor'+(c.m>1?'es':''):''}${!c.M&&!c.m?'—':''}</td><td><select data-f6lvl="${c.n}" aria-label="Nivel del componente ${c.n}"><option value="">Propuesto: ${F6LV[c.auto][0]}</option>${Object.entries(F6LV).map(([k,[l]])=>`<option value="${k}"${c.over&&c.lv===k?' selected':''}>${l}</option>`).join('')}</select></td><td>${bar(c.score)}</td></tr>`).join('')}</tbody></table></div><p class="cr-ref">Regla del instructivo: el puntaje parte del máximo del rango del nivel y descuenta 15 por cada hallazgo mayor y 5 por cada menor, sin bajar del mínimo. Conforme 85–100 · parcialmente conforme 50–84 · no conforme 0–49 · no evaluable: su peso se reparte. La herramienta propone el nivel (sin hallazgos mayores = conforme; 1 o 2 = parcial; 3 o más = no conforme); el auditor decide.</p>`;
+  const sevB=s=>s==='M'?'<span class="badge no">Mayor 🔴</span>':'<span class="badge pa">Menor</span>';
+  $('#f6-find').innerHTML=R.fs.length?R.C.filter(c=>c.L.length).map(c=>`<details class="f3b" open><summary><span class="f3b-t">${c.n}. ${esc(c.t)}</span><span class="badge ${c.M?'no':'pa'}">${c.M?c.M+' mayor'+(c.M>1?'es':'')+' · ':''}${c.m} menor${c.m===1?'':'es'}</span></summary><div class="f3b-in"><ul class="f6list">${c.L.sort((a,b)=>(a.sev==='M'?0:1)-(b.sev==='M'?0:1)).map(x=>`<li>${sevB(x.sev)}${x.rule?` <span class="badge op">Regla ${x.rule}</span>`:''} ${x.go?`<button type="button" class="f3go f6go" data-f6go="${esc(x.go)}">${esc(x.msg)}</button>`:esc(x.msg)}</li>`).join('')}</ul></div></details>`).join(''):'<p class="al-ok">Sin hallazgos con los datos registrados.</p>';
+  $('#f6-rules').innerHTML=F6RULES.map(([n,t])=>{ const bad=R.rules[n], st=bad?['Incumple','no']:n===5?['Cumple por diseño','ok']:R.ev.has(n)?['Sin hallazgos','ok']:['No evaluada','op']; return `<li class="lv-${bad?'c':'ok'}"><span class="badge ${st[1]}">${st[0]}</span> <b>${n}.</b> ${esc(t)}</li>`; }).join('');
+  // Revaloración
+  R.rows.forEach(x=>{ const b=$(`[data-f6b="${x.k}"]`); if(b) b.textContent=x.b==null?'—':fmtN(x.b,1); const d=$(`[data-f6d="${x.k}"]`); if(d){ d.textContent=x.d==null?'':(x.d>0?'+':'')+fmtN(x.d,1)+' · '+f6TrTxt(x.tr); d.className='mono '+(x.tr==='mejora'?'f6up':x.tr==='empeora'?'f6dn':''); } });
+  const dd=$('#f6-rvdays'); if(dd) dd.textContent=R.days!=null?`${R.days} día${R.days===1?'':'s'} desde la valoración inicial (${fmtD(state.meta.fechaVal)}).`:'';
+  const gsig=JSON.stringify(R.goals.map(o=>[o.g.id,o.n]));
+  if(f6Sig.g!==gsig){ f6Sig.g=gsig; const F=f6State(); $('#f6-goals').innerHTML=R.goals.length?R.goals.map(o=>{ const gr=F.rv.g[o.g.id]||{}; return `<div class="f5g"><div class="f5g-h"><span class="f5g-n">Objetivo ${o.n}</span><span class="f3hint">${esc(trunc(o.g.esp||'Sin descripción',140))}${o.g.meta?' · meta: '+esc(o.g.meta):''}</span></div><div class="chips">${F6GOAL.map(([k,l])=>`<button type="button" class="chip" data-f6g="${esc(o.g.id)}|${k}" aria-pressed="${gr.st===k}">${l}</button>`).join('')}</div><label class="f5f full"><span>Valor alcanzado o comentario</span><input type="text" data-f6="rv.g.${esc(o.g.id)}.val" value="${esc(gr.val||'')}" autocomplete="off"></label></div>`; }).join(''):'<p class="muted">No hay objetivos en la Fase 5 para revalorar.</p>'; }
+  $('#f6-rvinc').innerHTML=R.rinc.map(m=>`<li class="lv-c"><span class="badge no">Inconsistencia</span> ${esc(m)}</li>`).join('');
+  const valid=R.dims.filter(d=>d.score!=null);
+  $('#f6-counts').innerHTML=pillF(`<b>${R.total==null?'—':fmtN(R.total,1)}</b> total`,R.meta?'ok':'c')+pillF(`<b>${R.nM}</b> hallazgos mayores`,R.nM?'c':'ok')+pillF(`<b>${R.fs.length-R.nM}</b> menores`,R.fs.length-R.nM?'m':'ok')+pillF(`<b>${valid.filter(d=>d.score>=80).length}/${valid.length}</b> dimensiones ≥80`,valid.every(d=>d.score>=80)?'ok':'m')+pillF(`<b>${R.rows.filter(x=>x.x!=null).length}</b> medidas revaloradas`,'');
+  $('#f6-hc').value=f6Paragraph(R);
+  const nb=$('[data-navsec="f6"] .nb'); if(nb){ nb.className='nb '+(R.nM?'inc':R.meta?'ok':'ver'); nb.textContent=R.nM?R.nM:R.meta?'✓':fmtN(R.total||0,0); nb.title=`Total ${R.total==null?'—':fmtN(R.total,1)} · ${R.nM} mayores`; }
+  return R;
+}
+function f6Paragraph(R){
+  const F=f6State(), L=[], P_='[INFORMACIÓN PENDIENTE]';
+  L.push('AUDITORÍA DE LA NOTA Y REVALORACIÓN (FASE 6 · VERIFICAR Y ACTUAR)');
+  L.push('-----------------------------------------------');
+  L.push(`Autor: ${F.autor||P_} · ${F.rol||'rol '+P_} · registro ${F.registro||P_}${F.sup?' · supervisor: '+F.sup:''} · hora de la valoración: ${F.hora||P_}.`);
+  L.push('');
+  L.push(`AUTOAUDITORÍA (instructivo del servicio): total ${R.total==null?'—':fmtN(R.total,1)}/100 · ${R.meta?'cumple la meta (≥80, ningún componente <80, sin hallazgos mayores)':'no cumple la meta'}.`);
+  R.C.forEach(c=>L.push(`  ${c.n}. ${c.t}: ${F6LV[c.lv][0].toLowerCase()}${c.over?' (asignado por el auditor)':' (propuesto)'} · ${c.score==null?'N/E':fmtN(c.score,0)} · ${c.M} mayores, ${c.m} menores.`));
+  if(R.fs.length){ L.push(''); L.push('HALLAZGOS:'); R.fs.slice().sort((a,b)=>(a.sev==='M'?0:1)-(b.sev==='M'?0:1)||a.c-b.c).forEach(x=>L.push(`  - [${x.sev==='M'?'MAYOR':'MENOR'} · C${x.c}${x.rule?' · regla '+x.rule:''}] ${x.msg}`)); }
+  const anyRv=R.rows.some(x=>x.x!=null)||R.goals.some(o=>F.rv.g[o.g.id])||F.rv.dec.length;
+  if(anyRv){ L.push(''); L.push(`REVALORACIÓN${F.rv.fecha?' DEL '+fmtD(F.rv.fecha):' ('+P_+': fecha)'}${R.days!=null?` (${R.days} días después de la valoración inicial)`:''}:`);
+    R.rows.filter(x=>x.x!=null).forEach(x=>L.push(`  ${x.l}: ${x.b==null?'—':fmtN(x.b,1)} → ${fmtN(x.x,1)}${x.u&&x.u!=='0–4'?' '+x.u.replace(/^\//,'/'):''}${x.d!=null?` (${x.d>0?'+':''}${fmtN(x.d,1)}, ${f6TrTxt(x.tr).replace(/^[↑↓] /,'')})`:''}.`));
+    const gl=R.goals.filter(o=>F.rv.g[o.g.id]&&(F.rv.g[o.g.id].st||F.rv.g[o.g.id].val)); if(gl.length){ L.push('  Objetivos:'); gl.forEach(o=>{ const g=F.rv.g[o.g.id]; L.push(`   ${o.n}. ${(F6GOAL.find(z=>z[0]===g.st)||['','Sin calificar'])[1]}${g.val?': '+g.val:''}.`); }); }
+    L.push(`  Decisión: ${F.rv.dec.length?F.rv.dec.map(k=>F6DEC.find(z=>z[0]===k)[1].toLowerCase()).join('; '):P_}.${F.rv.nota.trim()?' '+F.rv.nota.trim():''}${F.rv.prox?' Próxima revaloración: '+fmtD(F.rv.prox)+'.':''}`);
+    R.rinc.forEach(m=>L.push('  [INCONSISTENCIA] '+m)); }
+  L.push(''); L.push('Herramienta formativa basada en el instructivo de auditoría del servicio: no reemplaza el juicio clínico ni certifica cumplimiento normativo o de acreditación.');
+  return L.join('\n');
+}
+function f6Export(){ const R=lastF6; if(!R) return null; const F=f6State();
+  return {autor:{nombre:F.autor||null,rol:F.rol||null,registro:F.registro||null,supervisor:F.sup||null,hora:F.hora||null},verificacionesManuales:F.man,
+    auditoria:{total:R.total==null?null:Math.round(R.total*10)/10,cumpleMeta:R.meta,componentes:R.C.map(c=>({componente:c.n,nombre:c.t,nivel:F6LV[c.lv][0],asignadoPorAuditor:c.over,puntaje:c.score,mayores:c.M,menores:c.m})),hallazgos:R.fs.map(x=>({componente:x.c,severidad:x.sev==='M'?'mayor':'menor',regla:x.rule,mensaje:x.msg})),reglasIncumplidas:Object.keys(R.rules).map(Number)},
+    revaloracion:{fecha:F.rv.fecha||null,diasDesdeValoracion:R.days,medidas:R.rows.filter(x=>x.b!=null||x.x!=null).map(x=>({medida:x.l,ingreso:x.b,revaloracion:x.x,cambio:x.d,tendencia:x.tr})),objetivos:R.goals.map(o=>({numero:o.n,resultado:(F.rv.g[o.g.id]||{}).st||null,valor:(F.rv.g[o.g.id]||{}).val||null})),decision:F.rv.dec,nota:F.rv.nota||null,proximaRevaloracion:F.rv.prox||null,inconsistencias:R.rinc}}; }
+/* Eventos de la Fase 6 */
+document.addEventListener('input',e=>{ const t=e.target; if(!t.dataset||t.dataset.f6==null) return; const F=f6State(); setIn(F,t.dataset.f6,t.value); if(t.type==='date') refreshNow(); else schedule(); });
+document.addEventListener('change',e=>{ const t=e.target; if(!t.dataset) return; if(t.dataset.f6lvl){ const F=f6State(); if(t.value) F.lvl[t.dataset.f6lvl]=t.value; else delete F.lvl[t.dataset.f6lvl]; refreshNow(); } });
+document.addEventListener('click',e=>{ const t=e.target.closest('[data-f6man],[data-f6dec],[data-f6g],[data-f6go]'); if(!t) return; const F=f6State();
+  if(t.dataset.f6man){ const k=t.dataset.f6man; F.man[k]=!F.man[k]; if(!F.man[k]) delete F.man[k]; t.setAttribute('aria-pressed',String(!!F.man[k])); refreshNow(); return; }
+  if(t.dataset.f6dec){ const k=t.dataset.f6dec, i=F.rv.dec.indexOf(k); if(i>=0) F.rv.dec.splice(i,1); else F.rv.dec.push(k); t.setAttribute('aria-pressed',String(i<0)); refreshNow(); return; }
+  if(t.dataset.f6g){ const [id,k]=t.dataset.f6g.split('|'); const g=F.rv.g[id]||(F.rv.g[id]={}); g.st=g.st===k?'':k; $$(`[data-f6g^="${id}|"]`).forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.f6g===id+'|'+g.st))); refreshNow(); return; }
+  if(t.dataset.f6go){ const el=document.querySelector(t.dataset.f6go); if(el){ if(el.tagName==='DETAILS') el.open=true; const pd=el.closest('details'); if(pd) pd.open=true; el.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}); el.classList.remove('flash'); void el.offsetWidth; el.classList.add('flash'); } }
+});
+
+
 /* ───────── Ciclo de actualización ───────── */
 let tmr=null;
 function schedule(){ clearTimeout(tmr); tmr=setTimeout(refreshNow,220); }
@@ -4276,7 +4584,8 @@ function refreshNow(){
   const F2=refreshF2(A);
   const F4=refreshF4();
   const F5=refreshF5();
-  $('#sum-text').value=buildSummary(A)+'\n\n'+f3Paragraph(F3)+'\n\n'+f2Paragraph(F2)+'\n\n'+f4Paragraph(F4)+'\n\n'+f5Paragraph(F5);
+  const F6=refreshF6();
+  $('#sum-text').value=buildSummary(A)+'\n\n'+f3Paragraph(F3)+'\n\n'+f2Paragraph(F2)+'\n\n'+f4Paragraph(F4)+'\n\n'+f5Paragraph(F5)+'\n\n'+f6Paragraph(F6);
   if(autosaveOn) LS.set('rof1.draft',JSON.stringify({t:Date.now(),s:state}));
 }
 
@@ -4827,6 +5136,7 @@ const ACTIONS={
   'copy-f5':()=>copyText($('#f5-hc').value,$('#f5-hc'),'Párrafo de la Fase 5 copiado'),
   'f5-enf-accept':()=>{ const B=lastF5; if(!B||!B.E.sug) return; const F=f5State(); F5ENF.forEach(e=>{ if(B.E.R[e.k].s>=2) F.enf[e.k]='si'; }); F.prim=B.E.sug; F.enf[B.E.sug]='si'; refreshNow(); toast('Sugerencia aplicada: revise los enfoques'); },
   'f5-goal-blank':()=>{ const F=f5State(); const g={id:'g'+uid(),prob:'',plazo:'',sem:'',fecha:'',esp:'',ind:'',bas:'',meta:'',qmeta:'',rel:'',alc:'',enf:F.prim||'',disc:[],src:''}; F.goals.push(g); refreshNow(); const el=$('#f5g-'+g.id); if(el){ el.scrollIntoView({block:'center'}); } },
+  'copy-f6':()=>copyText($('#f6-hc').value,$('#f6-hc'),'Párrafo de la Fase 6 copiado'),
   'copy-f4':()=>copyText($('#f4-hc').value,$('#f4-hc'),'Párrafo de la Fase 4 copiado'),
   'f4-pf-use':()=>{ const p=lastF4&&lastF4.X.pf; if(!p){ toast('No hay propuesta de factores personales'); return; } f4State().pf=p; $('#f4-pf').value=p; refreshNow(); toast('Propuesta copiada: edítela si es necesario'); },
   'f4-dx-use':()=>{ const p=lastF4&&lastF4.dxProp; if(!p) return; const t=p.replace(/\n\* Calificador sugerido[^\n]*$/,'').trim(); f4State().dx=t; $('#f4-dx').value=t; refreshNow(); const d=$('#f4-dx'); d.focus({preventScroll:true}); toast('Propuesta copiada al texto final: edítela'); },
