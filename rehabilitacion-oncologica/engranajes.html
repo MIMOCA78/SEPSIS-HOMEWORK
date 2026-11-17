@@ -1,0 +1,461 @@
+<title>Engranajes del Razonamiento Clínico</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: sistema de engranajes a la izquierda (el paciente es el eje), panel docente a la derecha; en celular se apilan. */
+:root{
+  --bg:#EDF1F3; --surface:#FFFFFF; --sunk:#F5F8F9; --ink:#13222C; --muted:#546470; --line:#D2DBE0;
+  --accent:#0E6E73;
+  --g-eje:#13222C; --g-hc:#6B5CA5; --g-enc:#B97E12; --g-fx:#2D6FB3; --g-seg:#B23A48; --g-cif:#9A7429; --g-plan:#3C8A4E; --g-aud:#127A86;
+  --ok:#2E7D4F; --warn:#A86A0C; --stop:#B23A48;
+  --f-display:"Sora", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E161B; --surface:#162128; --sunk:#111B21; --ink:#E3EBEE; --muted:#93A4AE; --line:#2A3943;
+  --accent:#4DB6B9;
+  --g-eje:#E3EBEE; --g-hc:#9C8FD6; --g-enc:#E0A93F; --g-fx:#6BA4E0; --g-seg:#E06A77; --g-cif:#D2A653; --g-plan:#6CC07F; --g-aud:#4DB6C2;
+  --ok:#5CC285; --warn:#E3A73F; --stop:#E06A77; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E161B; --surface:#162128; --sunk:#111B21; --ink:#E3EBEE; --muted:#93A4AE; --line:#2A3943;
+  --accent:#4DB6B9;
+  --g-eje:#E3EBEE; --g-hc:#9C8FD6; --g-enc:#E0A93F; --g-fx:#6BA4E0; --g-seg:#E06A77; --g-cif:#D2A653; --g-plan:#6CC07F; --g-aud:#4DB6C2;
+  --ok:#5CC285; --warn:#E3A73F; --stop:#E06A77; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.5}
+.wrap{max-width:1320px;margin:0 auto;padding-block:28px 48px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+h1{font-size:clamp(1.6rem,3.2vw,2.3rem);font-weight:700;letter-spacing:-.01em}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.lede{color:var(--muted);max-width:68ch;margin:.5rem 0 0}
+header{display:grid;gap:18px;margin-bottom:22px}
+.controls{display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between}
+.lens{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.lens .lbl{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+button{font:inherit;color:inherit;cursor:pointer}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:5px 13px;font-size:.9rem;font-weight:600}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip:focus-visible,.btn:focus-visible,.gear:focus-visible,.dz:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.nav{display:flex;gap:6px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 12px;font-weight:600;font-size:.9rem}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--surface)}
+
+main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:980px){main{grid-template-columns:minmax(0,1fr)}}
+.stage{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 12px)}
+@media (max-width:980px){.stage{position:static}}
+svg.machine{width:100%;max-width:640px;height:auto;display:block;margin:0 auto}
+.gear{cursor:pointer;transition:opacity .25s}
+.gear .body{fill:color-mix(in srgb, var(--g) 20%, var(--surface));stroke:var(--g);stroke-width:2}
+.gear .hole{fill:var(--bg);stroke:var(--g);stroke-width:1.5}
+.gear .disc{fill:var(--surface);stroke:color-mix(in srgb, var(--g) 45%, var(--surface));stroke-width:1.5}
+.gear .num{font-family:var(--f-mono);font-size:13px;fill:var(--g);font-weight:500}
+.gear .nm{font-family:var(--f-display);font-size:11.5px;font-weight:600;fill:var(--ink)}
+.gear.sel .body{stroke-width:3.5;fill:color-mix(in srgb, var(--g) 34%, var(--surface))}
+.gear.sel .disc{stroke:var(--g);stroke-width:2.5}
+.gear.dim{opacity:.38}
+.gear:hover .body{fill:color-mix(in srgb, var(--g) 30%, var(--surface))}
+.hub circle{fill:var(--ink);transition:fill .2s}
+.hub.sel circle{fill:var(--accent)}
+.hub text{fill:var(--bg);font-family:var(--f-display);font-weight:600}
+.ciflbl{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;fill:var(--g-cif);font-weight:500}
+.cifpill{fill:var(--surface);stroke:var(--g-cif);stroke-width:1.5}
+.chain{fill:none;stroke:var(--line);stroke-width:2;stroke-dasharray:3 7}
+
+.phva{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;max-width:640px;margin:14px auto 0}
+.phva div{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:7px 8px;text-align:center;transition:background .2s,color .2s,border-color .2s}
+.phva b{display:block;font-family:var(--f-display);font-size:1.05rem}
+.phva span{font-size:.78rem;color:var(--muted)}
+.phva div.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.phva div.on span{color:var(--bg);opacity:.8}
+.legend{max-width:640px;margin:10px auto 0;font-size:.85rem;color:var(--muted);text-align:center}
+
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px clamp(18px,3vw,32px) 30px;min-width:0;border-top:6px solid var(--g)}
+.phead{display:flex;gap:14px;align-items:flex-start}
+.badge{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-weight:500;background:color-mix(in srgb, var(--g) 18%, var(--surface));color:var(--g);border:2px solid var(--g)}
+.phead h2{font-size:1.45rem;line-height:1.2}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.tag{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.04em;padding:3px 8px;border-radius:5px;background:var(--sunk);border:1px solid var(--line);color:var(--muted)}
+.tag.ph{color:var(--ink);font-weight:500}
+.panel section{margin-top:22px}
+.panel h3{font-size:.8rem;font-family:var(--f-mono);font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.panel p{margin:0;max-width:68ch}
+.panel ul{margin:0;padding-left:1.15rem;display:grid;gap:4px}
+.lensnote{margin-top:16px;padding:10px 14px;border-radius:8px;background:color-mix(in srgb, var(--g) 10%, var(--surface));border:1px solid color-mix(in srgb, var(--g) 35%, var(--surface));font-size:.95rem}
+.lensnote b{font-family:var(--f-display);font-size:.85rem}
+.tool{display:grid;gap:4px;padding:12px 14px;border-radius:8px;border:1px dashed var(--g);background:var(--sunk)}
+.tool b{font-family:var(--f-display);font-size:.95rem}
+.tool small{color:var(--muted);font-size:.88rem}
+.q li::marker{content:"¿  ";color:var(--g);font-weight:700}
+.err li::marker{content:"✕  ";color:var(--stop)}
+.case{border-left:3px solid var(--g);padding:2px 0 2px 14px}
+.case .tit{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--g);margin-bottom:6px}
+
+.tl{list-style:none;padding:0 !important;gap:0 !important;position:relative}
+.tl li{display:grid;grid-template-columns:86px 1fr;gap:10px;padding:5px 0;border-bottom:1px solid var(--line);font-size:.94rem}
+.tl li:last-child{border-bottom:0}
+.tl time{font-family:var(--f-mono);font-size:.8rem;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:2px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.kv div{background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.kv span{display:block;font-size:.78rem;color:var(--muted)}
+.kv b{font-family:var(--f-mono);font-weight:500;font-variant-numeric:tabular-nums}
+
+.sem{display:grid;gap:6px}
+.sem div{display:grid;grid-template-columns:12px minmax(0,150px) minmax(0,1fr);gap:10px;align-items:start;padding:7px 10px;border-radius:8px;background:var(--sunk);border:1px solid var(--line);font-size:.92rem}
+.sem i{width:12px;height:12px;border-radius:50%;margin-top:5px}
+.sem i.ok{background:var(--ok)} .sem i.warn{background:var(--warn)} .sem i.stop{background:var(--stop)}
+.sem b{font-family:var(--f-mono);font-weight:500;font-size:.86rem}
+.fine{font-size:.83rem;color:var(--muted);margin-top:8px !important}
+
+.cifg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.cifg > div{background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:9px 11px;font-size:.9rem;min-width:0}
+.cifg .full{grid-column:1/-1;text-align:center;background:color-mix(in srgb, var(--g) 14%, var(--surface));border-color:color-mix(in srgb, var(--g) 40%, var(--surface))}
+.cifg .half{grid-column:span 1}
+.cifg .wide{grid-column:span 2}
+.cifg h4{margin:0 0 4px;font-family:var(--f-display);font-size:.82rem}
+.cifg ul{padding-left:1rem;gap:2px}
+@media (max-width:560px){.cifg{grid-template-columns:minmax(0,1fr)}.cifg .wide{grid-column:auto}}
+.bar{color:var(--stop);font-weight:600} .fac{color:var(--ok);font-weight:600}
+
+.dietz{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+@media (max-width:560px){.dietz{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.dz{border:1px solid var(--line);background:var(--sunk);border-radius:8px;padding:8px 6px;font-weight:600;font-size:.9rem;position:relative}
+.dz[aria-pressed="true"]{background:var(--g);color:var(--surface);border-color:var(--g)}
+.dz .pick{display:block;font-family:var(--f-mono);font-size:.64rem;letter-spacing:.06em;font-weight:500;opacity:.85}
+.dzout{margin-top:8px;padding:10px 12px;border-radius:8px;background:var(--sunk);border:1px solid var(--line);font-size:.93rem}
+.dzout em{font-style:normal;font-weight:700}
+.obj{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media (max-width:560px){.obj{grid-template-columns:minmax(0,1fr)}}
+.obj div{border:1px solid var(--line);border-radius:8px;padding:9px 11px;background:var(--sunk);font-size:.9rem}
+.obj h4{margin:0 0 2px;font-family:var(--f-display);font-size:.88rem}
+.obj time{font-family:var(--f-mono);font-size:.74rem;color:var(--muted);display:block;margin-bottom:4px}
+.discs{display:flex;flex-wrap:wrap;gap:6px}
+.discs span{padding:4px 10px;border-radius:999px;font-size:.86rem;border:1px solid var(--g);background:color-mix(in srgb, var(--g) 12%, var(--surface));font-weight:600}
+.discs span.off{border-style:dashed;border-color:var(--line);background:transparent;color:var(--muted);font-weight:400}
+
+.rub{width:100%;border-collapse:collapse;font-size:.9rem}
+.rubw{overflow-x:auto}
+.rub th,.rub td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.rub th{font-family:var(--f-mono);font-size:.72rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.rub td.n{font-family:var(--f-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.st{display:inline-block;padding:1px 8px;border-radius:999px;font-size:.78rem;font-weight:700}
+.st.ok{background:color-mix(in srgb, var(--ok) 16%, var(--surface));color:var(--ok)}
+.st.warn{background:color-mix(in srgb, var(--warn) 16%, var(--surface));color:var(--warn)}
+.up{color:var(--ok);font-weight:700}
+
+footer{margin-top:34px;border-top:1px solid var(--line);padding-top:16px;display:grid;gap:6px;color:var(--muted);font-size:.88rem}
+footer strong{color:var(--ink);font-family:var(--f-display);font-size:1rem}
+@media (prefers-reduced-motion: reduce){.gear,.phva div{transition:none}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <div class="eyebrow">Rehabilitación oncológica · Herramienta docente</div>
+      <h1>Engranajes del razonamiento clínico</h1>
+      <p class="lede">El paciente y su familia son el eje. El residente mueve el sistema con su razonamiento. Seleccione un engranaje para ver qué aporta, qué preguntas debe hacerse el residente, qué herramienta lo apoya y cómo se ve en un caso.</p>
+    </div>
+    <div class="controls">
+      <div class="lens" role="group" aria-label="Programa del residente">
+        <span class="lbl">Programa</span>
+        <button class="chip" data-lens="rehab" aria-pressed="true">Rehabilitación</button>
+        <button class="chip" data-lens="geri" aria-pressed="false">Geriatría</button>
+        <button class="chip" data-lens="pal" aria-pressed="false">Dolor y paliativos</button>
+        <button class="chip" data-lens="ped" aria-pressed="false">Oncología pediátrica</button>
+        <button class="chip" data-lens="enf" aria-pressed="false">Enfermería oncológica</button>
+      </div>
+      <div class="nav">
+        <button class="btn" id="prev" aria-label="Engranaje anterior">← Anterior</button>
+        <button class="btn primary" id="next" aria-label="Engranaje siguiente">Siguiente →</button>
+        <button class="btn" id="spin" aria-pressed="true">Pausar</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="stage">
+      <svg class="machine" id="machine" viewBox="0 0 700 700" role="group" aria-label="Sistema de engranajes de la valoración en rehabilitación oncológica"></svg>
+      <div class="phva" id="phva" aria-label="Ciclo PHVA">
+        <div data-p="P"><b>P</b><span>Planear</span></div>
+        <div data-p="H"><b>H</b><span>Hacer</span></div>
+        <div data-p="V"><b>V</b><span>Verificar</span></div>
+        <div data-p="A"><b>A</b><span>Actuar</span></div>
+      </div>
+      <p class="legend">Los engranajes atenuados tienen menor énfasis para el programa seleccionado. La línea punteada es la cadena PHVA: la auditoría devuelve el ciclo al inicio.</p>
+    </div>
+    <article class="panel" id="panel" aria-live="polite"></article>
+  </main>
+
+  <footer>
+    <strong>La IA organiza; el juicio clínico decide; el paciente es el centro.</strong>
+    <span>Caso clínico ficticio con fines docentes. Las herramientas de IA se alimentan con información seudonimizada (Ley 1581 de 2012) y el profesional valida cada dato contra la historia clínica.</span>
+    <span>Los umbrales de seguridad son orientadores y se ajustan al protocolo institucional y al concepto de las especialidades tratantes.</span>
+  </footer>
+</div>
+
+<script>
+(function(){
+const ORDER=['eje','hc','enc','fx','seg','cif','plan','aud'];
+
+const LENS={
+  rehab:{name:'Rehabilitación', hi:['hc','enc','fx','seg','cif','plan','aud'], notes:{
+    eje:'Usted lidera la conversación sobre metas funcionales y la traduce en objetivos.',
+    hc:'Reconstruya la trayectoria completa: cada tratamiento deja secuelas funcionales previsibles.',
+    enc:'La revisión por sistemas orienta qué escalas aplicar en el examen.',
+    fx:'Responsable del examen neuromusculoesquelético completo y de elegir la clinimetría.',
+    seg:'Usted decide la modalidad terapéutica segura; documente el criterio antes de prescribir.',
+    cif:'La integración CIF es el núcleo de su nota: es lo que se evalúa en la rotación.',
+    plan:'Define el enfoque de Dietz, los objetivos y las disciplinas. Coordina al equipo.',
+    aud:'Revalore con las mismas escalas y audite su propia nota antes del egreso.'}},
+  geri:{name:'Geriatría', hi:['enc','fx','seg','plan'], notes:{
+    eje:'Explore preferencias y directrices anticipadas; involucre al cuidador desde el inicio.',
+    hc:'Revise polifarmacia y cascadas de prescripción.',
+    enc:'Cognición, delirium (CAM), ánimo, caídas previas y sobrecarga del cuidador.',
+    fx:'Fragilidad (G8, Edmonton Frail Scale), SPPB, sarcopenia (SARC-F, dinamometría).',
+    seg:'Hipotensión ortostática y fármacos que aumentan el riesgo de caídas.',
+    cif:'Relacione la reserva funcional previa con la deficiencia actual.',
+    plan:'Metas ajustadas a la reserva funcional; prevenga el deterioro asociado a la hospitalización.',
+    aud:'Verifique que el riesgo de caída y la cognición queden registrados.'}},
+  pal:{name:'Dolor y cuidado paliativo', hi:['hc','enc','cif','plan'], notes:{
+    eje:'Metas de cuidado y lo que da sentido a los días del paciente.',
+    hc:'Intención del tratamiento oncológico y metas de cuidado acordadas.',
+    enc:'Carga sintomática con ESAS-r; tipo de dolor (ECS-CP) y su impacto en la actividad.',
+    fx:'PPS y ESAS-r como mínimos; el examen guía analgesia antes de la terapia.',
+    seg:'Ajuste analgésico previo a la movilización; somnolencia por opioides.',
+    cif:'Contraste pronóstico vital (PPS, PPI) con pronóstico funcional.',
+    plan:'Enfoque de soporte o paliativo: confort, autonomía posible y prevención de complicaciones.',
+    aud:'Revise que el plan sea coherente con las metas de cuidado registradas.'}},
+  ped:{name:'Oncología pediátrica', hi:['hc','enc','fx','seg','plan'], notes:{
+    eje:'La familia es la unidad de cuidado; incluya al niño o adolescente según su edad.',
+    hc:'Fase del protocolo de tratamiento y toxicidades tardías esperadas.',
+    enc:'Escolaridad, juego, hitos del desarrollo y dinámica familiar.',
+    fx:'Lansky, WeeFIM y valoración del desarrollo en lugar de Karnofsky y FIM.',
+    seg:'Umbrales hematológicos del protocolo pediátrico, catéteres y aislamiento.',
+    cif:'Participación significa escuela, juego y relación con pares.',
+    plan:'Objetivos expresados en juego y escuela; educación a padres y cuidadores.',
+    aud:'Verifique que el registro use escalas acordes al ciclo vital.'}},
+  enf:{name:'Enfermería oncológica', hi:['enc','seg','plan','aud'], notes:{
+    eje:'Necesidades de cuidado del paciente y la capacidad real del cuidador.',
+    hc:'Dispositivos, medicamentos de alto riesgo y precauciones de cada especialidad.',
+    enc:'Esfínteres, piel, sueño, alimentación, dolor y ánimo como necesidades de cuidado.',
+    fx:'Riesgo de caídas (Morse o Downton) y de lesiones por presión (Braden).',
+    seg:'Verificación antes de movilizar y metas internacionales de seguridad del paciente.',
+    cif:'Identifique barreras de cuidado en el hogar.',
+    plan:'Educación al cuidador y continuidad del cuidado después del egreso.',
+    aud:'Calidad y trazabilidad del registro de enfermería.'}}
+};
+
+const G={
+eje:{n:'Eje', name:'Paciente y familia', color:'--g-eje', phva:['P','H','V','A'], phTxt:'Todo el ciclo',
+  tool:null,
+  aporta:'Es el eje del sistema: los engranajes giran alrededor de lo que el paciente valora y necesita. Comienza con el motivo de la interconsulta y con la pregunta: ¿qué quiere lograr esta persona?',
+  datos:['Motivo de la interconsulta: quién la solicita y qué pregunta hace','Metas, expectativas y valores del paciente y la familia','Comprensión de la enfermedad y del pronóstico','Cuidador principal y su disponibilidad real','Decisiones compartidas y consentimiento para el plan'],
+  caso:{tit:'Caso docente (ficticio)', html:'<p><b>Mujer de 58 años</b>, diestra, separada, modista independiente. Vive con su hija de 32 años en un tercer piso sin ascensor. Cáncer de mama luminal B con metástasis óseas en T10 y fémur proximal izquierdo. Interconsulta de Oncología Clínica: <i>"debilidad de miembros inferiores y caídas; valorar potencial de rehabilitación"</i>.</p><p style="margin-top:8px">Su meta: <b>"Volver a caminar en mi casa e ir al baño sola."</b></p>'},
+  preg:['¿La meta del paciente es alcanzable en la estancia prevista y con su pronóstico?','¿La familia comparte esa meta o tiene otras expectativas?','¿Qué información sobre el pronóstico ya conoce el paciente?'],
+  err:['Formular objetivos sin preguntar al paciente qué quiere lograr.','Confundir el motivo de la interconsulta con el diagnóstico oncológico.']},
+
+hc:{n:1, name:'Historia clínica institucional', color:'--g-hc', phva:['P'], phTxt:'Planear',
+  tool:{name:'Organizador de información clínica (GEM en Gemini)', d:'Entrada: historia clínica seudonimizada. Salida: resumen estructurado y línea de tiempo de tratamientos y paraclínicos. El residente valida cada dato contra la fuente.'},
+  aporta:'Reconstruye la trayectoria oncológica en orden cronológico: diagnóstico, secuencia de tratamientos, paraclínicos y conceptos de las especialidades tratantes.',
+  datos:['Sociodemográficos: edad, sexo o género, lateralidad, estado civil, ocupación, red de apoyo, vivienda','Diagnóstico oncológico: localización, histología, estadio, metástasis, intención del tratamiento','Tratamientos con fechas: cirugía, quimioterapia, radioterapia, terapias dirigidas','Paraclínicos del más antiguo al más reciente','Conceptos y precauciones de las especialidades tratantes','Medicamentos actuales y dispositivos'],
+  caso:{tit:'Línea de tiempo del caso', html:'<ul class="tl">'+[
+    ['2023-03','Biopsia: carcinoma ductal infiltrante, luminal B, HER2 negativo. Estadio IIB.'],
+    ['2023-04','Quimioterapia neoadyuvante AC-T (antraciclinas y taxanos). Neuropatía grado 1.'],
+    ['2023-10','Mastectomía radical modificada izquierda con vaciamiento axilar.'],
+    ['2023-12','Radioterapia adyuvante de pared torácica. Inicia hormonoterapia.'],
+    ['2026-08','Gammagrafía ósea: captación en T10 y fémur proximal izquierdo.'],
+    ['2026-09','RM de columna: lesión lítica T10 sin compresión medular. Radioterapia paliativa a T10.'],
+    ['2026-11','Ecocardiograma: FEVI 58 %. Hemograma: plaquetas 62.000/µL, Hb 8,9 g/dL.'],
+    ['2026-11','Neurocirugía: manejo no quirúrgico; evitar flexión y torsión con carga. Ortopedia: carga parcial en miembro inferior izquierdo.']
+  ].map(r=>'<li><time>'+r[0]+'</time><span>'+r[1]+'</span></li>').join('')+'</ul>'},
+  preg:['¿Cuál es la intención actual del tratamiento: curativa, de control o paliativa?','¿Qué toxicidad funcional dejó cada tratamiento (neuropatía, cardiotoxicidad, fibrosis por radiación, linfedema)?','¿Qué restricción dejó escrita cada especialidad tratante?'],
+  err:['Copiar paraclínicos sin fecha ni orden cronológico.','Omitir las restricciones de ortopedia o neurocirugía.','Usar la salida de la herramienta sin verificarla en la historia clínica.']},
+
+enc:{n:2, name:'Encuentro con el paciente', color:'--g-enc', phva:['P'], phTxt:'Planear',
+  tool:{name:'Sin herramienta: es la conversación', d:'El interrogatorio y la revisión por sistemas recogen lo que la historia clínica no dice. Ninguna herramienta reemplaza este encuentro.'},
+  aporta:'Hace visible la carga sintomática, las necesidades y el contexto real de la persona.',
+  datos:['Síntomas: dolor, deglución, disnea, náuseas, control de esfínteres, caídas, visión, audición, palpitaciones','Sueño (somnolencia, insomnio), estado de ánimo, fatiga','Cognición y signos de delirium','Pérdida de peso e ingesta','Red de apoyo real y cuidador principal','Vivienda: escaleras, baño, accesos'],
+  caso:{tit:'Hallazgos del interrogatorio', html:'<ul><li>Dolor lumbar 7/10, mecánico, peor al sentarse.</li><li>Debilidad progresiva de miembros inferiores durante 3 semanas; 2 caídas en el último mes.</li><li>Fatiga intensa, insomnio de conciliación, ánimo bajo.</li><li>Pérdida de 8 kg en 4 meses; hiporexia.</li><li>Control de esfínteres conservado. Sin disfagia ni disnea.</li><li>Cuidadora: hija, trabaja en las tardes.</li></ul>'},
+  preg:['¿Qué es lo que más le importa poder hacer al salir del hospital?','¿Cuál síntoma limita más su actividad hoy?','¿Quién cuidará en casa y qué sabe hacer?'],
+  err:['Registrar "niega síntomas" sin explorar cada sistema.','No preguntar por caídas previas ni por el entorno del hogar.']},
+
+fx:{n:3, name:'Examen físico y clinimetría', color:'--g-fx', phva:['P'], phTxt:'Planear',
+  tool:{name:'Herramienta de evaluación musculoesquelética y clinimetría', d:'Consolida el examen cefalocaudal y las escalas en un registro estructurado. Permite comparar ingreso y egreso con los mismos instrumentos.'},
+  aporta:'Objetiva lo que el paciente reporta: el hallazgo se vuelve medible y comparable en el tiempo.',
+  datos:['Signos vitales, peso, talla, IMC','Examen neuromusculoesquelético cefalocaudal','Fuerza por segmentos, reflejos, sensibilidad superficial, nociceptiva y propioceptiva','Desempeño global: Karnofsky, Lansky, ECOG, PPS','Independencia en AVD: Barthel, FIM, WeeFIM','Desempeño físico: SPPB, dinamometría, TUG','Síntomas: ESAS-r. Específicas según hallazgos: deglución, linfedema, neuropatía, fragilidad'],
+  caso:{tit:'Examen y escalas al ingreso', html:'<div class="kv">'+[
+    ['Signos vitales','FC 96 · PA 108/68'],['SpO₂ · T°','95 % · 36,8 °C'],['Peso · talla','54 kg · 1,58 m'],['IMC','21,6 kg/m²'],
+    ['Fuerza MMII','3/5 proximal · 4/5 distal'],['Reflejos','2+ simétricos'],['Sensibilidad','Conservada'],['Dinamometría (D)','16 kg'],
+    ['Karnofsky','50'],['Barthel','45 / 100'],['SPPB','3 / 12'],['ESAS-r','Dolor 7 · Cansancio 8 · Ánimo 6']
+  ].map(r=>'<div><span>'+r[0]+'</span><b>'+r[1]+'</b></div>').join('')+'</div>'},
+  preg:['¿Qué hallazgo del examen explica la limitación que reporta el paciente?','¿Hay signos de compresión medular que cambien la prioridad?','¿Qué escala usará para medir el cambio al egreso?'],
+  err:['Aplicar escalas sin una pregunta clínica que las justifique.','Escribir "fuerza conservada" sin especificar segmentos.','Confundir ESAS-r con la Edmonton Frail Scale.']},
+
+seg:{n:4, name:'Criterios de seguridad', color:'--g-seg', phva:['P','H'], phTxt:'Planear → Hacer',
+  tool:{name:'Herramienta de criterios de seguridad', d:'Cruza paraclínicos, signos vitales, riesgo óseo y conceptos de especialistas. Entrega un semáforo por criterio y la modalidad terapéutica segura para hoy.'},
+  aporta:'Funciona como el embrague del sistema: define qué intervención es segura hoy y cuál debe esperar o modificarse.',
+  datos:['Hemograma: plaquetas, hemoglobina, neutrófilos','Coagulación, anticoagulación, TVP o TEP','Electrolitos y calcio (hipercalcemia)','Función cardiaca tras antraciclinas o trastuzumab','Metástasis óseas: Mirels (huesos largos) y SINS (columna)','Signos vitales en reposo y respuesta al esfuerzo','Dispositivos y restricciones de las especialidades'],
+  caso:{tit:'Semáforo del caso', html:'<div class="sem">'+[
+    ['ok','Plaquetas 62.000/µL','Ejercicio activo; evitar cargas altas y actividades con riesgo de trauma.'],
+    ['warn','Hb 8,9 g/dL','Vigilar síntomas, FC y SpO₂ durante la sesión; dosificar la intensidad.'],
+    ['warn','SINS 9 · T10','Potencialmente inestable: evitar flexión y torsión con carga; seguir el concepto de neurocirugía.'],
+    ['warn','Mirels 8 · fémur izq.','Riesgo limítrofe: carga parcial con caminador según ortopedia.'],
+    ['ok','FEVI 58 %','Sin restricción cardiaca para ejercicio aeróbico de baja intensidad.'],
+    ['ok','Doppler MMII negativo','Sin TVP; movilización temprana indicada.'],
+    ['ok','Calcio corregido 10,1 mg/dL','Sin hipercalcemia.']
+  ].map(r=>'<div><i class="'+r[0]+'" aria-label="'+({ok:'Verde',warn:'Amarillo',stop:'Rojo'})[r[0]]+'"></i><b>'+r[1]+'</b><span>'+r[2]+'</span></div>').join('')+'</div><p class="fine">Referencias orientadoras: SINS 0–6 estable, 7–12 potencialmente inestable, 13–18 inestable. Mirels ≥ 9 sugiere fijación profiláctica. Los umbrales hematológicos se ajustan al protocolo institucional.</p>'},
+  preg:['¿Qué intervención es segura hoy y cuál debe esperar?','¿Qué parámetro debe revisarse antes de cada sesión?','¿La restricción es absoluta o pide cambiar la modalidad?'],
+  err:['Suspender toda la rehabilitación por una cifra aislada en lugar de ajustar la modalidad.','Movilizar sin revisar el hemograma más reciente.','No registrar el criterio de seguridad que sustenta la prescripción.']},
+
+cif:{n:5, name:'Análisis CIF', color:'--g-cif', phva:['P'], phTxt:'Planear',
+  tool:{name:'Razonamiento del residente', d:'Es el engranaje central: aquí engranan todos los demás. Las herramientas lo alimentan, pero el análisis lo construye el residente.'},
+  aporta:'Integra la información clínica, paraclínica y funcional según la Clasificación Internacional del Funcionamiento, de la Discapacidad y de la Salud (OMS). Contrasta pronóstico oncológico y pronóstico funcional.',
+  datos:['Deficiencias en funciones y estructuras corporales','Limitaciones en la actividad','Restricciones en la participación','Factores ambientales: barreras y facilitadores','Factores personales','Pronóstico oncológico, funcional y vital'],
+  caso:{tit:'Análisis CIF del caso', html:'<div class="cifg">'+
+    '<div class="full"><h4>Condición de salud</h4>Cáncer de mama luminal B estadio IV con metástasis óseas (T10, fémur izquierdo). Intención del tratamiento: control. PPS 50 %.</div>'+
+    '<div><h4>Funciones y estructuras</h4><ul><li>Dolor óseo T10</li><li>Debilidad proximal de MMII</li><li>Fatiga y anemia</li><li>Pérdida de peso</li></ul></div>'+
+    '<div><h4>Actividades</h4><ul><li>Transferencias</li><li>Marcha mayor de 10 m</li><li>Escaleras</li><li>Uso del baño, aseo inferior</li></ul></div>'+
+    '<div><h4>Participación</h4><ul><li>Trabajo como modista</li><li>Salir de casa</li><li>Vida social y religiosa</li></ul></div>'+
+    '<div class="wide"><h4>Factores ambientales</h4><span class="bar">Barreras:</span> tercer piso sin ascensor, baño sin barras, cuidadora disponible solo en las mañanas. <span class="fac">Facilitadores:</span> hija comprometida, aseguramiento, equipo interdisciplinario.</div>'+
+    '<div><h4>Factores personales</h4>58 años, motivada, meta clara, miedo a caer.</div>'+
+    '<div class="full" style="text-align:left"><h4>Pronóstico</h4><b>Oncológico:</b> enfermedad metastásica en control. <b>Funcional:</b> reservado a moderado, con potencial de lograr transferencias y marcha corta en casa con caminador. <b>Vital:</b> estimar con PPS y PPI y discutir con oncología.</div>'+
+    '</div>'},
+  preg:['¿Qué deficiencia explica más limitaciones y es modificable?','¿Qué barrera ambiental puede cambiarse antes del egreso?','¿El pronóstico funcional es coherente con el oncológico?'],
+  err:['Listar diagnósticos en lugar de describir el funcionamiento.','Olvidar factores ambientales y personales.','Proponer objetivos que el pronóstico no sostiene.']},
+
+plan:{n:6, name:'Análisis y plan de rehabilitación', color:'--g-plan', phva:['P','H'], phTxt:'Planear → Hacer',
+  tool:{name:'Redacción del residente', d:'El plan se escribe a partir del análisis CIF. Las herramientas aportan datos; el enfoque, los objetivos y las disciplinas los decide el residente con el equipo.'},
+  aporta:'Define el enfoque terapéutico (criterios de Dietz), los objetivos a corto, mediano y largo plazo ajustados al pronóstico y a la estancia de 8 a 15 días, y las disciplinas que ayudarán a lograrlos.',
+  datos:null, special:'plan',
+  preg:['¿Cada objetivo es medible, tiene plazo y responde a una limitación del análisis?','¿El enfoque de Dietz es coherente con la intención del tratamiento oncológico?','¿Qué disciplina responde a cada barrera identificada?'],
+  err:['Objetivos genéricos como "mejorar la funcionalidad".','Plazos que superan la estancia sin plan de continuidad.','Interconsultar disciplinas sin un objetivo concreto para cada una.']},
+
+aud:{n:7, name:'Verificación y auditoría', color:'--g-aud', phva:['V','A'], phTxt:'Verificar → Actuar',
+  tool:{name:'Herramienta de auditoría de historia clínica en rehabilitación oncológica', d:'Revisa la completitud por dominio y la coherencia entre hallazgos, análisis y plan. Sirve como control de calidad y como rúbrica formativa para el residente.'},
+  aporta:'Cierra el ciclo PHVA: verifica que el plan produjo cambios medibles, ajusta lo necesario y devuelve el sistema al inicio con nueva información.',
+  datos:['Completitud por dominio (1 a 8 y análisis)','Coherencia: hallazgo → análisis → objetivo → disciplina','Objetivos medibles con plazo','Misma escala al ingreso y al egreso','Criterio de seguridad documentado antes de intervenir','Trazabilidad normativa: Resolución 1995 de 1999, Ley 2015 de 2020'],
+  special:'aud',
+  preg:['¿Otro profesional podría continuar el plan solo con su nota?','¿Qué cambió entre la primera y la última medición?','¿Hay que cambiar el enfoque de Dietz o los objetivos?'],
+  err:['Revalorar con escalas distintas a las del ingreso.','Auditar solo la forma y no la coherencia clínica.']}
+};
+
+const DIETZ={
+  prev:{t:'Preventivo', d:'Se interviene tras el diagnóstico, antes o durante el tratamiento, cuando aún no hay discapacidad, para prevenirla o reducirla.', fit:'No aplica como enfoque principal: la paciente ya tiene limitaciones establecidas.'},
+  rest:{t:'Restaurativo', d:'Busca el retorno al nivel previo de función cuando se espera control de la enfermedad con mínima discapacidad residual.', fit:'Parcial: hay componentes recuperables (fuerza, acondicionamiento), pero la enfermedad metastásica limita el retorno completo.'},
+  sop:{t:'Soporte', d:'La enfermedad persiste o progresa; se busca la máxima función posible y la adaptación a la discapacidad con entrenamiento, ayudas técnicas y modificación del entorno.', fit:'Elegido: enfermedad metastásica en control, con potencial de ganar independencia con caminador, adaptación del baño y entrenamiento de la cuidadora.'},
+  pal:{t:'Paliativo', d:'Enfermedad avanzada: confort, control de síntomas, prevención de complicaciones y apoyo emocional, conservando la autonomía posible.', fit:'Complementario: control del dolor y de la fatiga, en paralelo con el equipo de cuidado paliativo. Será el enfoque principal si la enfermedad progresa.'}
+};
+
+/* ---------- gears geometry ---------- */
+const NS='http://www.w3.org/2000/svg', CX=350, CY=350, R=120, NC=24, r=75, NSAT=15, DEPTH=14, RATIO=R/r;
+const SAT=[['hc',-90],['enc',-30],['fx',30],['seg',90],['plan',150],['aud',210]];
+const svg=document.getElementById('machine');
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;}
+function gearPath(rp,n){const ro=rp+DEPTH/2, ri=rp-DEPTH/2, st=2*Math.PI/n; let d='';
+  for(let i=0;i<n;i++){const a=i*st, pts=[[ri,a],[ro,a+st*.13],[ro,a+st*.37],[ri,a+st*.5],[ri,a+st]];
+    pts.forEach((p,j)=>{const x=(p[0]*Math.cos(p[1])).toFixed(2), y=(p[0]*Math.sin(p[1])).toFixed(2); d+=(i===0&&j===0?'M':'L')+x+' '+y;});}
+  return d+'Z';}
+// chain (PHVA) around the satellites
+el('circle',{cx:CX,cy:CY,r:R+r+r+12,class:'chain'},svg);
+
+const nodes={}; const rotors={};
+function makeGear(id,x,y,rp,n,isCenter){
+  const g=el('g',{class:'gear',tabindex:'0',role:'button','data-id':id,style:'--g: var('+G[id].color+')',transform:'translate('+x+' '+y+')','aria-label':(G[id].n==='Eje'?'':'Engranaje '+G[id].n+': ')+G[id].name},svg);
+  const rot=el('g',{},g);
+  el('path',{d:gearPath(rp,n),class:'body'},rot);
+  if(!isCenter){for(let k=0;k<4;k++){const a=k*Math.PI/2+Math.PI/4; el('circle',{cx:(58*Math.cos(a)).toFixed(1),cy:(58*Math.sin(a)).toFixed(1),r:5,class:'hole'},rot);}
+    el('circle',{r:49,class:'disc'},g);
+    el('text',{y:-12,'text-anchor':'middle',class:'num'},g).textContent=String(G[id].n).padStart(2,'0');
+    const words=G[id].short||G[id].name; const lines=wrap(words,13);
+    lines.forEach((ln,i)=>{el('text',{y:6+i*15-(lines.length-1)*4,'text-anchor':'middle',class:'nm'},g).textContent=ln;});
+  } else {
+    for(let k=0;k<8;k++){const a=k*Math.PI/4; el('circle',{cx:(92*Math.cos(a)).toFixed(1),cy:(92*Math.sin(a)).toFixed(1),r:6,class:'hole'},rot);}
+    el('rect',{x:-70,y:-90,width:140,height:24,rx:12,class:'cifpill'},g);
+    el('text',{y:-74,'text-anchor':'middle',class:'ciflbl'},g).textContent='05 · ANÁLISIS CIF';
+  }
+  nodes[id]=g; rotors[id]=rot; return g;}
+function wrap(s,max){const w=s.split(' '),out=[];let cur='';w.forEach(x=>{if((cur+' '+x).trim().length>max&&cur){out.push(cur);cur=x;}else cur=(cur+' '+x).trim();});if(cur)out.push(cur);return out.slice(0,3);}
+
+G.hc.short='Historia clínica'; G.enc.short='Encuentro con el paciente'; G.fx.short='Examen y clinimetría'; G.seg.short='Criterios de seguridad'; G.plan.short='Plan de rehabilitación'; G.aud.short='Auditoría';
+const SAT_POS={};
+SAT.forEach(([id,deg])=>{const a=deg*Math.PI/180, x=CX+(R+r)*Math.cos(a), y=CY+(R+r)*Math.sin(a); SAT_POS[id]=deg; makeGear(id,x,y,r,NSAT,false);});
+makeGear('cif',CX,CY,R,NC,true);
+// hub = patient axis
+const hub=el('g',{class:'hub',tabindex:'0',role:'button','data-id':'eje','aria-label':'Eje: paciente y familia',style:'cursor:pointer'},svg);
+el('circle',{cx:CX,cy:CY,r:56},hub);
+el('text',{x:CX,y:CY-6,'text-anchor':'middle','font-size':'13'},hub).textContent='Paciente';
+el('text',{x:CX,y:CY+12,'text-anchor':'middle','font-size':'13'},hub).textContent='y familia';
+nodes.eje=hub;
+
+/* ---------- rotation ---------- */
+const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+let spinning=!reduce, rotC=0, last=null;
+function place(){rotors.cif.setAttribute('transform','rotate('+rotC.toFixed(2)+')');
+  SAT.forEach(([id,deg])=>{const rs=deg+186-RATIO*(rotC-deg+3.75); rotors[id].setAttribute('transform','rotate('+rs.toFixed(2)+')');});}
+function frame(t){if(last!==null&&spinning){rotC+=(t-last)*0.006;} last=t; place(); requestAnimationFrame(frame);}
+place(); requestAnimationFrame(frame);
+const spinBtn=document.getElementById('spin');
+function setSpin(v){spinning=v;spinBtn.textContent=v?'Pausar':'Girar';spinBtn.setAttribute('aria-pressed',String(v));}
+setSpin(spinning);
+spinBtn.addEventListener('click',()=>setSpin(!spinning));
+
+/* ---------- state & panel ---------- */
+let current='hc', lens='rehab', dz='sop';
+const panel=document.getElementById('panel');
+function list(arr,cls){return '<ul'+(cls?' class="'+cls+'"':'')+'>'+arr.map(x=>'<li>'+x+'</li>').join('')+'</ul>';}
+function planHTML(){
+  const btns=Object.entries(DIETZ).map(([k,v])=>'<button class="dz" data-dz="'+k+'" aria-pressed="'+(k===dz)+'">'+v.t+(k==='sop'?'<span class="pick">CASO</span>':'')+'</button>').join('');
+  const o=DIETZ[dz];
+  return '<section><h3>Enfoque terapéutico · criterios de Dietz</h3><div class="dietz" role="group" aria-label="Enfoques de Dietz">'+btns+'</div>'+
+  '<div class="dzout"><p><em>'+o.t+'.</em> '+o.d+'</p><p style="margin-top:6px"><em>En el caso:</em> '+o.fit+'</p></div></section>'+
+  '<section><h3>Objetivos ajustados a la estancia (8 a 15 días)</h3><div class="obj">'+
+   '<div><h4>Corto plazo</h4><time>Días 1–5</time>Dolor ≤ 4/10 durante la sesión. Transferencias cama–silla con asistencia mínima. Educación en higiene de columna.</div>'+
+   '<div><h4>Mediano plazo</h4><time>Días 6–12</time>Marcha de 15 m con caminador y supervisión, con carga parcial izquierda. Uso del baño con barras y supervisión.</div>'+
+   '<div><h4>Largo plazo</h4><time>Egreso y después</time>Regreso a casa con cuidadora entrenada, baño adaptado y continuidad de rehabilitación domiciliaria. Barthel ≥ 65.</div>'+
+  '</div></section>'+
+  '<section><h3>Disciplinas</h3><div class="discs">'+
+   ['Terapia física','Terapia ocupacional','Psicología','Trabajo social','Nutrición clínica','Enfermería oncológica','Cuidado paliativo'].map(x=>'<span>'+x+'</span>').join('')+
+   ['Fonoaudiología','Terapia respiratoria','Psiquiatría'].map(x=>'<span class="off" title="Sin hallazgos que la indiquen hoy">'+x+'</span>').join('')+
+  '</div><p class="fine">Las disciplinas con borde punteado no se indican hoy porque no hay hallazgos que las justifiquen. Se reconsideran en la revaloración.</p></section>';}
+function audHTML(){
+  const rows=[['1. Sociodemográficos','Completo','ok'],['2. Diagnóstico oncológico','Completo','ok'],['3. Tratamientos en orden cronológico','Completo','ok'],['4. Paraclínicos en orden cronológico','Completo','ok'],['5. Revisión por sistemas','Completo','ok'],['6. Conceptos de especialidades','Completo','ok'],['7. Examen físico','Completo','ok'],['8. Clinimetría','Completo','ok'],['Análisis CIF y plan','Faltan las metas del paciente en el análisis','warn']];
+  return '<section><h3>Auditoría de la nota de ingreso</h3><div class="rubw"><table class="rub"><thead><tr><th>Dominio</th><th>Resultado</th></tr></thead><tbody>'+
+   rows.map(r=>'<tr><td>'+r[0]+'</td><td><span class="st '+r[2]+'">'+(r[2]==='ok'?'✓':'!')+'</span> '+r[1]+'</td></tr>').join('')+
+   '</tbody></table></div><p class="fine">Acción: el residente agrega la meta de la paciente al análisis y la vincula con el objetivo de uso del baño.</p></section>'+
+   '<section><h3>Revaloración · día 10</h3><div class="rubw"><table class="rub"><thead><tr><th>Medida</th><th>Ingreso</th><th>Día 10</th></tr></thead><tbody>'+
+   [['Barthel','45','65'],['SPPB','3','6'],['ESAS-r dolor','7','4'],['Karnofsky','50','60']].map(r=>'<tr><td>'+r[0]+'</td><td class="n">'+r[1]+'</td><td class="n up">'+r[2]+'</td></tr>').join('')+
+   '</tbody></table></div><p class="fine">Actuar: se mantiene el enfoque de soporte, se programa el egreso con rehabilitación domiciliaria y se entrena a la cuidadora en transferencias.</p></section>';}
+
+function render(){
+  const g=G[current], L=LENS[lens];
+  panel.style.setProperty('--g','var('+g.color+')');
+  const note=L.notes[current];
+  let h='<div class="phead"><div class="badge">'+(g.n==='Eje'?'◎':String(g.n).padStart(2,'0'))+'</div><div><h2>'+g.name+'</h2><div class="tags"><span class="tag ph">PHVA · '+g.phTxt+'</span>'+(g.tool?'<span class="tag">'+(g.tool.name.length>48?'Herramienta IA':g.tool.name)+'</span>':'')+'</div></div></div>';
+  if(note) h+='<div class="lensnote"><b>Énfasis para '+L.name+':</b> '+note+'</div>';
+  h+='<section><h3>Qué aporta</h3><p>'+g.aporta+'</p></section>';
+  if(g.tool) h+='<section><h3>Herramienta</h3><div class="tool"><b>'+g.tool.name+'</b><small>'+g.tool.d+'</small></div></section>';
+  if(g.datos) h+='<section><h3>Información que recoge</h3>'+list(g.datos)+'</section>';
+  if(g.caso) h+='<section><h3>En el caso</h3><div class="case"><div class="tit">'+g.caso.tit+'</div>'+g.caso.html+'</div></section>';
+  if(g.special==='plan') h+=planHTML();
+  if(g.special==='aud') h+=audHTML();
+  h+='<section><h3>Preguntas para el residente</h3>'+list(g.preg.map(q=>q.replace(/^¿/,'')),'q')+'</section>';
+  h+='<section><h3>Errores frecuentes</h3>'+list(g.err,'err')+'</section>';
+  panel.innerHTML=h;
+  panel.querySelectorAll('.dz').forEach(b=>b.addEventListener('click',()=>{dz=b.dataset.dz;render();const f=panel.querySelector('[data-dz="'+dz+'"]');if(f)f.focus();}));
+  // gears state
+  Object.entries(nodes).forEach(([id,n])=>{n.classList.toggle('sel',id===current);
+    const dim = id!=='eje' && id!=='cif' && !L.hi.includes(id); n.classList.toggle('dim',dim);});
+  document.querySelectorAll('#phva div').forEach(d=>d.classList.toggle('on',g.phva.includes(d.dataset.p)));
+}
+function select(id){current=id;render();}
+Object.entries(nodes).forEach(([id,n])=>{n.addEventListener('click',()=>select(id));n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(id);}});});
+document.getElementById('next').addEventListener('click',()=>select(ORDER[(ORDER.indexOf(current)+1)%ORDER.length]));
+document.getElementById('prev').addEventListener('click',()=>select(ORDER[(ORDER.indexOf(current)-1+ORDER.length)%ORDER.length]));
+document.querySelectorAll('.chip[data-lens]').forEach(c=>c.addEventListener('click',()=>{lens=c.dataset.lens;document.querySelectorAll('.chip[data-lens]').forEach(x=>x.setAttribute('aria-pressed',String(x===c)));try{localStorage.setItem('lens',lens);}catch(e){}render();}));
+try{const s=localStorage.getItem('lens');if(s&&LENS[s]){lens=s;document.querySelectorAll('.chip[data-lens]').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.lens===s)));}}catch(e){}
+render();
+})();
+</script>
